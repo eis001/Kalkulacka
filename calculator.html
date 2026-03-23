@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nezávazná kalkulačka webu | EH STUDIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
     /* ============================================
@@ -13,13 +16,55 @@
 
     .calc-page {
       min-height: 100vh;
+      background: #FFFFFF;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    /* Progress bar */
+    .calc-progress {
+      height: 4px;
+      background: var(--color-border);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 3rem;
+    }
+
+    .calc-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-accent), #60a5fa);
+      border-radius: 2px;
+      transition: width 0.4s ease;
+    }
+
+    .calc-step-indicators {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .calc-step-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-border);
+      transition: all 0.3s ease;
+    }
+
+    .calc-step-dot.active {
+      background: var(--color-accent);
+      transform: scale(1.25);
+    }
+
+    .calc-step-dot.completed {
+      background: rgba(34, 197, 94, 0.8);
     }
 
     .calc-back {
       display: inline-flex;
       align-items: center;
-      font-size: 0.9rem;
-      color: #9CA3AF;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: #6b7280;
       text-decoration: none;
       margin-bottom: 4rem;
       transition: color 0.25s ease;
@@ -39,7 +84,7 @@
     }
 
     .calc-header .logo-tagline {
-      font-size: 0.8rem;
+      font-size: 0.875rem;
       font-weight: 500;
       color: var(--color-accent);
       margin-bottom: 4rem;
@@ -48,16 +93,17 @@
     .calc-title {
       font-size: clamp(2rem, 5vw, 3rem);
       font-weight: 800;
-      color: var(--color-text);
+      color: #111827;
       line-height: 1.15;
       letter-spacing: -0.02em;
       margin-bottom: 1rem;
     }
 
     .calc-subtitle {
-      font-size: 1.05rem;
-      color: var(--color-text-secondary);
-      line-height: 1.7;
+      font-size: 1rem;
+      font-weight: 400;
+      color: #6b7280;
+      line-height: 1.6;
       max-width: 520px;
     }
 
@@ -89,7 +135,7 @@
       background: var(--color-bg);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
-      padding: 2.5rem;
+      padding: 2rem 2.5rem;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
@@ -99,42 +145,43 @@
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
     }
 
-    /* Question boxes — premium cards */
+    /* Question boxes */
     .question-box {
       background: var(--color-bg);
       border: 1px solid var(--color-border);
       border-radius: var(--radius);
-      padding: 1.5rem 1.75rem;
-      margin-bottom: 1.25rem;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      padding: 2rem 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
       transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
 
     .question-box:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
       border-color: #D1D5DB;
     }
 
     .question-box h3 {
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: var(--color-text);
-      margin-bottom: 0.5rem;
-      line-height: 1.5;
+      font-size: clamp(1.5rem, 3vw, 1.875rem);
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
     }
 
     .question-subtext {
-      font-size: 0.95rem;
-      color: var(--color-text-secondary);
+      font-size: 1rem;
+      font-weight: 400;
+      color: #6b7280;
       line-height: 1.6;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
     }
 
     .answer-options {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.25rem;
     }
 
     .answer-option {
@@ -148,7 +195,7 @@
       font-size: 1rem;
       border: 2px solid var(--color-border);
       border-radius: 14px;
-      background: var(--color-bg);
+      background: #FFFFFF;
       color: var(--color-text);
       cursor: pointer;
       transition: all 0.3s ease;
@@ -156,8 +203,8 @@
     }
 
     .answer-option:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     }
 
     .answer-option:active {
@@ -176,7 +223,7 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 0.35rem;
+      gap: 0.5rem;
     }
 
     .answer-option .option-check {
@@ -205,7 +252,8 @@
     /* Default variant (for future questions) */
     .answer-option.answer-variant-default.selected {
       border-color: var(--color-accent);
-      background: rgba(59, 130, 246, 0.08);
+      background: rgba(59, 130, 246, 0.06);
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
     }
 
     .answer-option.answer-variant-default.selected .option-check {
@@ -216,14 +264,14 @@
     /* Green variant */
     .answer-option.answer-variant-green:hover {
       border-color: rgba(34, 197, 94, 0.5);
-      background: rgba(34, 197, 94, 0.06);
-      box-shadow: 0 8px 24px rgba(34, 197, 94, 0.12);
+      background: rgba(34, 197, 94, 0.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     }
 
     .answer-option.answer-variant-green.selected {
       border-color: #22C55E;
-      background: rgba(34, 197, 94, 0.1);
-      box-shadow: 0 4px 16px rgba(34, 197, 94, 0.15);
+      background: rgba(34, 197, 94, 0.06);
+      box-shadow: 0 2px 8px rgba(34, 197, 94, 0.1);
     }
 
     .answer-option.answer-variant-green.selected .option-check {
@@ -233,15 +281,15 @@
 
     /* Blue variant */
     .answer-option.answer-variant-blue:hover {
-      border-color: rgba(59, 130, 246, 0.6);
-      background: rgba(59, 130, 246, 0.06);
-      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+      border-color: rgba(59, 130, 246, 0.5);
+      background: rgba(59, 130, 246, 0.05);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
     }
 
     .answer-option.answer-variant-blue.selected {
       border-color: var(--color-accent);
-      background: rgba(59, 130, 246, 0.1);
-      box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2);
+      background: rgba(59, 130, 246, 0.06);
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.12);
     }
 
     .answer-option.answer-variant-blue.selected .option-check {
@@ -252,14 +300,14 @@
     /* Red variant */
     .answer-option.answer-variant-red:hover {
       border-color: rgba(239, 68, 68, 0.5);
-      background: rgba(239, 68, 68, 0.05);
-      box-shadow: 0 8px 24px rgba(239, 68, 68, 0.1);
+      background: rgba(239, 68, 68, 0.04);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     }
 
     .answer-option.answer-variant-red.selected {
       border-color: #EF4444;
-      background: rgba(239, 68, 68, 0.08);
-      box-shadow: 0 4px 16px rgba(239, 68, 68, 0.12);
+      background: rgba(239, 68, 68, 0.05);
+      box-shadow: 0 2px 8px rgba(239, 68, 68, 0.1);
     }
 
     .answer-option.answer-variant-red.selected .option-check {
@@ -268,53 +316,68 @@
     }
 
     .answer-option .option-label {
+      font-size: 1.0625rem;
       font-weight: 600;
+      color: #111827;
       margin-bottom: 0;
+      line-height: 1.4;
     }
 
     .answer-option .option-desc {
-      font-size: 0.9rem;
-      color: var(--color-text-secondary);
+      font-size: 0.9375rem;
+      font-weight: 400;
+      color: #6b7280;
       line-height: 1.5;
     }
 
     .answer-option .option-price {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--color-accent);
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #2563eb;
       margin-top: 0.5rem;
     }
 
     .answer-option .option-price-highlight {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: #2563EB;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #2563eb;
       margin-top: 0.5rem;
       display: block;
     }
 
-    /* Price box — highlight, premium */
+    .option-price-pill {
+      display: inline-block;
+      padding: 0.35rem 0.875rem;
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #2563eb;
+      background: rgba(59, 130, 246, 0.12);
+      border-radius: 999px;
+      margin-top: 0.5rem;
+    }
+
+    /* Price box */
     .price-box {
-      background: linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 100%);
+      background: #FFFFFF;
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
       padding: 2rem 2rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
     }
 
     .price-label {
-      font-size: 0.8rem;
+      font-size: 12px;
       font-weight: 600;
-      color: var(--color-text-secondary);
+      color: #6b7280;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       margin-bottom: 0.75rem;
     }
 
     .price-value {
-      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-size: clamp(2.25rem, 4vw, 2.5rem);
       font-weight: 800;
-      color: var(--color-text);
+      color: #111827;
       letter-spacing: -0.02em;
       line-height: 1.2;
       transition: transform 0.2s ease;
@@ -332,8 +395,9 @@
     }
 
     .price-note {
-      font-size: 0.8rem;
-      color: var(--color-text-secondary);
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: #6b7280;
       margin-top: 0.75rem;
       line-height: 1.5;
     }
@@ -346,12 +410,50 @@
       border-top: 1px solid var(--color-border);
     }
 
+    .calc-step-nav {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .calc-btn-nav {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 10px;
+      border: 1px solid var(--color-border);
+      background: var(--color-bg);
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .calc-btn-nav:hover {
+      background: var(--color-bg-subtle);
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+
+    .calc-step-content {
+      display: none;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .calc-step-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateX(0);
+    }
+
     .btn-offer {
       display: inline-block;
       padding: 1rem 2.25rem;
       background: var(--color-accent);
       color: white;
-      font-size: 1rem;
+      font-size: 1.0625rem;
       font-weight: 600;
       text-decoration: none;
       border: none;
@@ -372,8 +474,9 @@
     }
 
     .calculator-note {
-      font-size: 0.875rem;
-      color: var(--color-text-secondary);
+      font-size: 0.9375rem;
+      font-weight: 400;
+      color: #6b7280;
       margin-top: 1.25rem;
       line-height: 1.6;
     }
@@ -414,10 +517,18 @@
     <div class="calculator-wrapper">
       <div class="calculator-main">
         <div class="calculator-card">
-          <div id="calculator-questions"></div>
+          <div class="calc-progress">
+            <div class="calc-progress-bar" id="calc-progress-bar" style="width: 33%"></div>
+          </div>
+          <div class="calc-step-indicators" id="calc-step-dots"></div>
+          <div id="calculator-steps"></div>
 
-          <div class="calculator-footer">
-            <button class="btn-offer" id="btn-offer">Chci nezávaznou nabídku</button>
+          <div class="calc-step-nav" id="calc-step-nav">
+            <button type="button" class="calc-btn-nav calc-btn-back" id="calc-btn-back" style="display: none">← Zpět</button>
+          </div>
+
+          <div class="calculator-footer" id="calc-footer">
+            <button class="btn-offer" id="btn-offer" style="display: none">Chci nezávaznou nabídku</button>
             <p class="calculator-note">Cena je orientační. Finální nabídku doladíme podle rozsahu projektu.</p>
           </div>
         </div>

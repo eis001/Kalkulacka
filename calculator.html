@@ -16,22 +16,58 @@
 
     .calc-page {
       min-height: 100vh;
-      background: #FFFFFF;
+      background: linear-gradient(to bottom, #f8fafc, #eef2f7);
       font-family: 'Inter', system-ui, sans-serif;
     }
 
-    /* Progress bar */
+    /* Minimal header — vlevo Zpět, vpravo EH STUDIO */
+    .calc-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .calc-back {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: #6b7280;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .calc-back:hover {
+      color: #111827;
+    }
+
+    .calc-logo {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #6b7280;
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .calc-logo:hover {
+      color: #111827;
+    }
+
+    /* Progress bar — tenký, čistý */
     .calc-progress {
-      height: 4px;
-      background: var(--color-border);
+      height: 3px;
+      background: #e5e7eb;
       border-radius: 2px;
       overflow: hidden;
-      margin-bottom: 3rem;
+      margin-bottom: 0.75rem;
     }
 
     .calc-progress-bar {
       height: 100%;
-      background: linear-gradient(90deg, var(--color-accent), #60a5fa);
+      background: #3b82f6;
       border-radius: 2px;
       transition: width 0.4s ease;
     }
@@ -39,7 +75,7 @@
     .calc-step-indicators {
       display: flex;
       gap: 0.5rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
     .calc-step-dot {
@@ -59,59 +95,11 @@
       background: rgba(34, 197, 94, 0.8);
     }
 
-    .calc-back {
-      display: inline-flex;
-      align-items: center;
-      font-size: 0.9375rem;
-      font-weight: 500;
-      color: #6b7280;
-      text-decoration: none;
-      margin-bottom: 4rem;
-      transition: color 0.25s ease;
-    }
-
-    .calc-back:hover {
-      color: #4B5563;
-    }
-
-    .calc-header {
-      margin-bottom: 5rem;
-    }
-
-    .calc-header .logo {
-      display: block;
-      margin-bottom: 0.2rem;
-    }
-
-    .calc-header .logo-tagline {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--color-accent);
-      margin-bottom: 4rem;
-    }
-
-    .calc-title {
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 800;
-      color: #111827;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 1rem;
-    }
-
-    .calc-subtitle {
-      font-size: 1rem;
-      font-weight: 400;
-      color: #6b7280;
-      line-height: 1.6;
-      max-width: 520px;
-    }
-
     /* Layout — Desktop: grid, Mobile: stack */
     .calculator-wrapper {
       display: grid;
-      grid-template-columns: 1fr 320px;
-      gap: 3rem;
+      grid-template-columns: 1fr 300px;
+      gap: 2.5rem;
       align-items: start;
     }
 
@@ -127,63 +115,56 @@
 
     .price-sticky {
       position: sticky;
-      top: 2rem;
+      top: 1rem;
     }
 
-    /* Main calculator card */
+    /* Main calculator card — premium */
     .calculator-card {
-      background: var(--color-bg);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: 2rem 2.5rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      background: #FFFFFF;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 36px 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      transition: box-shadow 0.2s ease;
     }
 
-    .calculator-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-    }
-
-    /* Question boxes */
+    /* Question boxes — vzdušné */
     .question-box {
-      background: var(--color-bg);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      padding: 2rem 2rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      margin-bottom: 2rem;
     }
 
-    .question-box:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-      border-color: #D1D5DB;
+    .question-box:last-child {
+      margin-bottom: 0;
     }
 
     .question-box h3 {
-      font-size: clamp(1.5rem, 3vw, 1.875rem);
-      font-weight: 700;
+      font-size: clamp(1.75rem, 3vw, 2rem);
+      font-weight: 800;
       color: #111827;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
       line-height: 1.2;
+      letter-spacing: -0.02em;
     }
 
     .question-subtext {
-      font-size: 1rem;
+      font-size: 0.9375rem;
       font-weight: 400;
       color: #6b7280;
-      line-height: 1.6;
+      line-height: 1.5;
       margin-bottom: 1.5rem;
     }
 
     .answer-options {
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
+      gap: 14px;
     }
 
+    /* Premium selection cards */
     .answer-option {
       display: flex;
       flex-direction: row;
@@ -191,32 +172,33 @@
       justify-content: space-between;
       gap: 1rem;
       text-align: left;
-      padding: 1.25rem 1.5rem;
+      padding: 20px 22px;
       font-size: 1rem;
-      border: 2px solid var(--color-border);
+      border: 1px solid transparent;
       border-radius: 14px;
-      background: #FFFFFF;
+      background: #f9fafb;
       color: var(--color-text);
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
       position: relative;
     }
 
     .answer-option:hover {
+      border-color: #3b82f6;
+      background: #f0f6ff;
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     }
 
     .answer-option:active {
-      transform: translateY(-1px) scale(0.99);
+      transform: translateY(-1px);
     }
 
     .answer-option.selected {
-      transform: scale(1.01);
+      border-width: 2px;
     }
 
     .answer-option.selected:hover {
-      transform: translateY(-3px) scale(1.01);
+      transform: translateY(-2px);
     }
 
     .answer-option .option-content {
@@ -249,29 +231,26 @@
       transform: scale(1);
     }
 
-    /* Default variant (for future questions) */
+    /* Default variant */
     .answer-option.answer-variant-default.selected {
-      border-color: var(--color-accent);
-      background: rgba(59, 130, 246, 0.06);
-      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+      border-color: #3b82f6;
+      background: #eef4ff;
     }
 
     .answer-option.answer-variant-default.selected .option-check {
-      background: var(--color-accent);
+      background: #3b82f6;
       color: white;
     }
 
     /* Green variant */
     .answer-option.answer-variant-green:hover {
-      border-color: rgba(34, 197, 94, 0.5);
-      background: rgba(34, 197, 94, 0.05);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      border-color: #3b82f6;
+      background: #f0f6ff;
     }
 
     .answer-option.answer-variant-green.selected {
       border-color: #22C55E;
-      background: rgba(34, 197, 94, 0.06);
-      box-shadow: 0 2px 8px rgba(34, 197, 94, 0.1);
+      background: rgba(34, 197, 94, 0.08);
     }
 
     .answer-option.answer-variant-green.selected .option-check {
@@ -281,33 +260,29 @@
 
     /* Blue variant */
     .answer-option.answer-variant-blue:hover {
-      border-color: rgba(59, 130, 246, 0.5);
-      background: rgba(59, 130, 246, 0.05);
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
+      border-color: #3b82f6;
+      background: #f0f6ff;
     }
 
     .answer-option.answer-variant-blue.selected {
-      border-color: var(--color-accent);
-      background: rgba(59, 130, 246, 0.06);
-      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.12);
+      border-color: #3b82f6;
+      background: #eef4ff;
     }
 
     .answer-option.answer-variant-blue.selected .option-check {
-      background: var(--color-accent);
+      background: #3b82f6;
       color: white;
     }
 
     /* Red variant */
     .answer-option.answer-variant-red:hover {
-      border-color: rgba(239, 68, 68, 0.5);
-      background: rgba(239, 68, 68, 0.04);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      border-color: #3b82f6;
+      background: #f0f6ff;
     }
 
     .answer-option.answer-variant-red.selected {
       border-color: #EF4444;
-      background: rgba(239, 68, 68, 0.05);
-      box-shadow: 0 2px 8px rgba(239, 68, 68, 0.1);
+      background: rgba(239, 68, 68, 0.06);
     }
 
     .answer-option.answer-variant-red.selected .option-check {
@@ -316,66 +291,67 @@
     }
 
     .answer-option .option-label {
-      font-size: 1.0625rem;
+      font-size: 1rem;
       font-weight: 600;
       color: #111827;
       margin-bottom: 0;
-      line-height: 1.4;
+      line-height: 1.35;
     }
 
     .answer-option .option-desc {
-      font-size: 0.9375rem;
+      font-size: 0.875rem;
       font-weight: 400;
       color: #6b7280;
-      line-height: 1.5;
+      line-height: 1.45;
     }
 
     .answer-option .option-price {
-      font-size: 1.125rem;
-      font-weight: 700;
+      font-size: 1rem;
+      font-weight: 600;
       color: #2563eb;
       margin-top: 0.5rem;
     }
 
     .answer-option .option-price-highlight {
-      font-size: 1.25rem;
+      font-size: 1.125rem;
       font-weight: 700;
       color: #2563eb;
       margin-top: 0.5rem;
       display: block;
     }
 
+    /* Price jako badge — výrazná */
     .option-price-pill {
       display: inline-block;
-      padding: 0.35rem 0.875rem;
-      font-size: 1.125rem;
+      padding: 4px 10px;
+      font-size: 1rem;
       font-weight: 700;
       color: #2563eb;
-      background: rgba(59, 130, 246, 0.12);
+      background: rgba(37, 99, 235, 0.1);
       border-radius: 999px;
       margin-top: 0.5rem;
     }
 
-    /* Price box */
+    /* Price box — premium highlight */
     .price-box {
       background: #FFFFFF;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: 2rem 2rem;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     }
 
     .price-label {
-      font-size: 12px;
+      font-size: 0.6875rem;
       font-weight: 600;
       color: #6b7280;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
     }
 
     .price-value {
-      font-size: clamp(2.25rem, 4vw, 2.5rem);
+      font-size: clamp(2rem, 4vw, 2.5rem);
       font-weight: 800;
       color: #111827;
       letter-spacing: -0.02em;
@@ -395,25 +371,25 @@
     }
 
     .price-note {
-      font-size: 0.875rem;
+      font-size: 0.8125rem;
       font-weight: 400;
       color: #6b7280;
-      margin-top: 0.75rem;
-      line-height: 1.5;
+      margin-top: 0.5rem;
+      line-height: 1.45;
     }
 
 
     /* Calculator footer */
     .calculator-footer {
-      margin-top: 2.5rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--color-border);
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
     }
 
     .calc-step-nav {
       display: flex;
       gap: 1rem;
-      margin-top: 2rem;
+      margin-top: 1.25rem;
     }
 
     .calc-btn-nav {
@@ -438,7 +414,7 @@
     .calc-step-content {
       display: none;
       opacity: 0;
-      transform: translateX(10px);
+      transform: translateX(8px);
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
@@ -446,6 +422,11 @@
       display: block;
       opacity: 1;
       transform: translateX(0);
+    }
+
+    /* Vzdušný spacing mezi question boxes v jednom kroku */
+    .calc-step-content .question-box + .question-box {
+      margin-top: 2rem;
     }
 
     .btn-offer {
@@ -474,21 +455,29 @@
     }
 
     .calculator-note {
-      font-size: 0.9375rem;
+      font-size: 0.8125rem;
       font-weight: 400;
       color: #6b7280;
-      margin-top: 1.25rem;
-      line-height: 1.6;
+      margin-top: 0.5rem;
+      line-height: 1.5;
     }
 
-    /* Generous container padding on desktop */
+    /* Center container — max-width 1100px, dostatek prostoru */
     .calc-page .container-wide {
-      padding: 3rem 2rem;
+      padding: 2.5rem 2.5rem 4rem;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     @media (max-width: 600px) {
       .calc-page .container-wide {
-        padding: 2rem 1.25rem;
+        padding: 1.5rem 1.25rem 3rem;
+      }
+
+      .calculator-card {
+        padding: 24px 20px;
+        border-radius: 16px;
       }
     }
 
@@ -503,78 +492,70 @@
     }
 
     /* ============================================
-       Summary Step — Dark gradient, form
+       Summary Step — Premium finish (Stripe / Linear / Apple)
        ============================================ */
     .calculator-card.calc-card-summary {
-      background: linear-gradient(160deg, #1e293b 0%, #0f172a 50%, #020617 100%);
-      border-color: rgba(255, 255, 255, 0.08);
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
-    }
-
-    .calculator-card.calc-card-summary:hover {
-      transform: none;
-    }
-
-    .calc-card-summary .calc-step-dot {
-      background: rgba(255, 255, 255, 0.25);
-    }
-
-    .calc-card-summary .calc-step-dot.active {
-      background: #4ade80;
-    }
-
-    .calc-card-summary .calc-step-dot.completed {
-      background: rgba(74, 222, 128, 0.6);
-    }
-
-    .calculator-card.calc-card-summary .calc-progress-bar {
-      background: linear-gradient(90deg, #22c55e, #4ade80);
+      background: #FFFFFF;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 2.5rem 2.75rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
     }
 
     .calc-step-summary {
-      padding: 0.5rem 0;
+      padding: 0;
     }
 
     .summary-header {
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     }
 
     .summary-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: rgba(34, 197, 94, 0.2);
-      color: #4ade80;
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.08) 100%);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      color: var(--color-accent);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
     }
 
     .summary-icon svg {
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
     }
 
-    .calc-card-summary .summary-title {
-      font-size: clamp(1.5rem, 3vw, 1.875rem);
-      font-weight: 700;
-      color: #f8fafc;
-      margin-bottom: 0.5rem;
+    .summary-title {
+      font-size: clamp(1.75rem, 3.5vw, 2.125rem);
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
     }
 
-    .calc-card-summary .summary-subtext {
-      font-size: 1rem;
-      color: rgba(248, 250, 252, 0.7);
-      line-height: 1.6;
+    .summary-subtext {
+      font-size: 1.0625rem;
+      font-weight: 400;
+      color: #6b7280;
+      line-height: 1.65;
       margin-bottom: 0;
+      max-width: 480px;
     }
 
     .summary-answers {
       margin-bottom: 2.5rem;
-      padding: 1.5rem 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 1.5rem 1.5rem;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 14px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
     }
 
     .summary-row {
@@ -582,38 +563,48 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 0.75rem 1.5rem;
-      padding: 1rem 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      gap: 0.75rem 2rem;
+      padding: 1.125rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
       font-size: 0.9375rem;
+    }
+
+    .summary-row:first-child {
+      padding-top: 0;
     }
 
     .summary-row:last-child {
       border-bottom: none;
+      padding-bottom: 0;
     }
 
     .summary-question {
-      color: rgba(248, 250, 252, 0.6);
+      color: #6b7280;
+      font-weight: 500;
       flex: 1;
       min-width: 0;
+      line-height: 1.45;
     }
 
     .summary-answer {
-      color: #f8fafc;
+      color: #111827;
       font-weight: 600;
+      font-size: 1rem;
       flex-shrink: 0;
       text-align: right;
+      line-height: 1.45;
     }
 
     .summary-form-section {
-      margin-bottom: 1.5rem;
+      margin-bottom: 0;
     }
 
     .summary-form-title {
       font-size: 1.125rem;
       font-weight: 600;
-      color: #f8fafc;
-      margin-bottom: 1.25rem;
+      color: #111827;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
     }
 
     .summary-form .form-group {
@@ -623,129 +614,220 @@
     .summary-form label {
       display: block;
       font-size: 0.9375rem;
-      font-weight: 500;
-      color: rgba(248, 250, 252, 0.9);
-      margin-bottom: 0.4rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
     }
 
     .summary-form .required {
-      color: #f87171;
+      color: #dc2626;
+      font-weight: 600;
     }
 
     .summary-form input,
     .summary-form textarea {
       width: 100%;
-      padding: 0.75rem 1rem;
+      padding: 0.875rem 1.125rem;
       font-size: 1rem;
       font-family: inherit;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.06);
-      color: #f8fafc;
-      transition: border-color 0.2s, background 0.2s;
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      background: #FFFFFF;
+      color: var(--color-text);
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .summary-form input:hover,
+    .summary-form textarea:hover {
+      border-color: #D1D5DB;
     }
 
     .summary-form input::placeholder,
     .summary-form textarea::placeholder {
-      color: rgba(248, 250, 252, 0.4);
+      color: #9CA3AF;
     }
 
     .summary-form input:focus,
     .summary-form textarea:focus {
       outline: none;
       border-color: var(--color-accent);
-      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+      background: #FFFFFF;
     }
 
     .summary-form textarea {
       resize: vertical;
-      min-height: 80px;
+      min-height: 96px;
+      line-height: 1.5;
     }
 
     .summary-form-actions {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 1rem;
-      margin-top: 1.75rem;
+      gap: 1rem 1.25rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
     }
 
     .summary-form .btn-submit {
       order: -1;
+      padding: 1rem 2rem;
+      font-size: 1.0625rem;
+      font-weight: 600;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+      border: none;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
     }
 
-    .btn-text {
+    .summary-form .btn-submit:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.45);
+      background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+    }
+
+    .summary-form .btn-submit:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .summary-form .btn-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .calc-step-summary .btn-edit-answers {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 10px;
+      border: 1px solid #E5E7EB;
+      background: #FFFFFF;
+      color: #374151;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+    }
+
+    .calc-step-summary .btn-edit-answers:hover {
+      background: #F9FAFB;
+      border-color: #D1D5DB;
+      color: #111827;
+    }
+
+    .calc-step-summary .btn-text {
       background: none;
       border: none;
       font-size: 0.9375rem;
-      color: rgba(248, 250, 252, 0.6);
+      font-weight: 500;
+      color: #6b7280;
       cursor: pointer;
-      text-decoration: underline;
-      padding: 0.25rem 0;
+      text-decoration: none;
+      padding: 0.375rem 0;
       transition: color 0.2s;
     }
 
-    .btn-text:hover {
-      color: #f8fafc;
+    .calc-step-summary .btn-text:hover {
+      color: #111827;
     }
 
     .summary-success {
-      padding: 2rem 0;
+      padding: 3rem 2rem;
       text-align: center;
     }
 
     .summary-success-text {
       font-size: 1.25rem;
       font-weight: 600;
-      color: #4ade80;
+      color: #059669;
     }
 
-    /* Price box summary variant */
+    /* Price box summary – premium finish */
+    .price-box-summary {
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .price-box-summary .price-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #6b7280;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
     .price-box-summary .price-summary-row {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       margin-bottom: 0.75rem;
-      gap: 1rem;
+      gap: 1.5rem;
+      padding: 0.5rem 0;
+    }
+
+    .price-box-summary .price-summary-row:first-of-type {
+      padding-top: 0;
     }
 
     .price-box-summary .price-summary-label {
-      font-size: 0.9375rem;
+      font-size: 0.875rem;
       color: #6b7280;
       font-weight: 500;
     }
 
     .price-box-summary .price-value {
-      font-size: 1.25rem;
+      font-size: 1.375rem;
       font-weight: 700;
       color: #111827;
+      letter-spacing: -0.02em;
     }
 
     .price-box-summary .price-note {
-      margin-top: 1rem;
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      font-size: 0.875rem;
+      line-height: 1.5;
     }
 
     @media (max-width: 600px) {
+      .calculator-card.calc-card-summary {
+        padding: 2rem 1.5rem;
+      }
+
       .summary-row {
         flex-direction: column;
-        gap: 0.25rem;
+        gap: 0.35rem;
+        padding: 1rem 0;
       }
 
       .summary-answer {
         text-align: left;
+      }
+
+      .summary-form-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .summary-form .btn-submit {
+        width: 100%;
       }
     }
   </style>
 </head>
 <body class="calc-page">
   <div class="container-wide">
-    <a href="index.html" class="calc-back">← Zpět na hlavní stránku</a>
-
-    <header class="calc-header">
-      <a href="index.html" class="logo">EH STUDIO</a>
-      <p class="logo-tagline">creative studio</p>
-      <h1 class="calc-title">Spočítejte si orientační cenu webu</h1>
-      <p class="calc-subtitle">Vyberte možnost níže a ihned uvidíte orientační cenu.</p>
+    <header class="calc-top-bar">
+      <a href="index.html" class="calc-back">← Zpět</a>
+      <a href="index.html" class="calc-logo">EH STUDIO</a>
     </header>
 
     <div class="calculator-wrapper">

@@ -136,17 +136,28 @@ html:has(.has-bg-animation) {
   color: #cbd5f5 !important;
 }
 
-/* Card text — dark on light cards */
-.has-bg-animation .process-card h3,
-.has-bg-animation .process-card p,
-.has-bg-animation .collab-content h4,
-.has-bg-animation .collab-content p,
+.landing.has-bg-animation .hero-intro {
+  color: #e2e8f0 !important;
+}
+
+/* Card text — landing: white/light (dark glass cards) */
+.landing.has-bg-animation .process-card h3,
+.landing.has-bg-animation .collab-content h4,
+.landing.has-bg-animation .service-content h4 {
+  color: #ffffff !important;
+}
+
+.landing.has-bg-animation .process-card p,
+.landing.has-bg-animation .collab-content p,
+.landing.has-bg-animation .service-content p {
+  color: #94a3b8 !important;
+}
+
+/* Calculator / other pages — dark text on light cards */
 .has-bg-animation .question-box h3,
 .has-bg-animation .option-label,
 .has-bg-animation .summary-question,
-.has-bg-animation .summary-answer,
-.has-bg-animation .service-content h4,
-.has-bg-animation .service-content p {
+.has-bg-animation .summary-answer {
   color: #0f172a !important;
 }
 
@@ -155,7 +166,6 @@ html:has(.has-bg-animation) {
   color: #475569 !important;
 }
 
-.has-bg-animation .process-card-badge,
 .has-bg-animation .price-label,
 .has-bg-animation .price-summary-label {
   color: #475569 !important;
@@ -163,6 +173,10 @@ html:has(.has-bg-animation) {
 
 .has-bg-animation .price-value {
   color: #0f172a !important;
+}
+
+.landing.has-bg-animation .process-card-badge {
+  color: #a5b4fc !important;
 }
 
 /* Layout */

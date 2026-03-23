@@ -188,14 +188,7 @@
       <div class="summary-answers">${rowsHtml}</div>
       <div class="summary-form-section">
         <h4 class="summary-form-title">Odešlete poptávku</h4>
-        <form id="summary-form" class="summary-form" method="POST" action="https://formsubmit.co/webyprokazdeho@gmail.com">
-          <input type="hidden" name="_subject" value="Nová poptávka z kalkulačky webu">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_next" id="hidden-next">
-          <input type="hidden" name="final_one_time_price" id="hidden-one-time">
-          <input type="hidden" name="final_monthly_price" id="hidden-monthly">
-          <input type="hidden" name="summary_answers" id="hidden-summary">
+        <form id="summary-form" class="summary-form">
           <div class="form-group">
             <label for="form-jmeno">Jméno a příjmení <span class="required">*</span></label>
             <input type="text" id="form-jmeno" name="jmeno" required placeholder="Jan Novák">
@@ -227,17 +220,65 @@
   }
 
   function handleFormSubmit(e) {
+    e.preventDefault();
     const form = e.target;
-    form.action = 'https://formsubmit.co/webyprokazdeho@gmail.com';
-    form.method = 'POST';
-    const totals = calculateTotal();
-    const nextInput = form.querySelector('#hidden-next');
-    if (nextInput) nextInput.value = new URL('thank-you.html', window.location.href).href;
-    form.querySelector('#hidden-one-time').value = totals.oneTime.toLocaleString('cs-CZ') + ' Kč';
-    form.querySelector('#hidden-monthly').value = totals.monthly > 0 ? totals.monthly.toLocaleString('cs-CZ') + ' Kč / měsíc' : '0 Kč';
-    form.querySelector('#hidden-summary').value = getSummaryRows().map((r) => `${r.question} → ${r.answer}`).join('\n');
     const submitBtn = form.querySelector('.btn-submit');
-    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Odesílám…'; }
+    const formSection = form.closest('.summary-form-section');
+    const errorEl = form.querySelector('.form-error');
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Odesílám…';
+    }
+    if (errorEl) errorEl.remove();
+
+    const totals = calculateTotal();
+    const finalPrice = totals.monthly > 0
+      ? totals.oneTime.toLocaleString('cs-CZ') + ' Kč jednorázově + ' + totals.monthly.toLocaleString('cs-CZ') + ' Kč / měsíc'
+      : totals.oneTime.toLocaleString('cs-CZ') + ' Kč';
+
+    const name = form.querySelector('[name="jmeno"]')?.value?.trim() || '';
+    const email = form.querySelector('[name="email"]')?.value?.trim() || '';
+    const phone = form.querySelector('[name="telefon"]')?.value?.trim() || '';
+    const company = form.querySelector('[name="firma"]')?.value?.trim() || '';
+    const note = form.querySelector('[name="poznamka"]')?.value?.trim() || '';
+    const summaryAnswers = getSummaryRows().map((r) => ({ question: r.question, answer: r.answer }));
+
+    fetch('https://script.google.com/macros/s/AKfycbyB_iTiqeNs3JvIRTrQbVR-arMJPyAFTXOaic4zQhGqkeyfq4HlaZ9AqkazqUoRak1F/exec', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        phone: phone,
+        company: company,
+        note: note,
+        price: finalPrice,
+        answers: summaryAnswers
+      })
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Request failed');
+        const ct = res.headers.get('content-type');
+        if (ct && ct.includes('application/json')) return res.json();
+        return {};
+      })
+      .then(() => {
+        const success = document.createElement('div');
+        success.className = 'summary-success';
+        success.innerHTML = '<p class="summary-success-text">Děkujeme, ozveme se vám co nejdříve.</p>';
+        formSection.replaceWith(success);
+      })
+      .catch(() => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Odeslat poptávku';
+        }
+        const errDiv = document.createElement('p');
+        errDiv.className = 'form-error';
+        errDiv.textContent = 'Odeslání se nepovedlo, zkuste to prosím znovu.';
+        form.insertBefore(errDiv, form.querySelector('.summary-form-actions'));
+      });
   }
 
   function handleRestart() {

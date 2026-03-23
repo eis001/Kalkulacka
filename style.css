@@ -153,26 +153,40 @@ html:has(.has-bg-animation) {
   color: #94a3b8 !important;
 }
 
-/* Calculator / other pages — dark text on light cards */
-.has-bg-animation .question-box h3,
-.has-bg-animation .option-label,
-.has-bg-animation .summary-question,
-.has-bg-animation .summary-answer {
-  color: #0f172a !important;
+/* Calculator — high contrast text on dark glass */
+.calc-page.has-bg-animation .question-box h3,
+.calc-page.has-bg-animation .option-label,
+.calc-page.has-bg-animation .summary-answer,
+.calc-page.has-bg-animation .summary-form-title {
+  color: #ffffff !important;
 }
 
-.has-bg-animation .option-desc,
-.has-bg-animation .question-subtext {
-  color: #475569 !important;
+.calc-page.has-bg-animation .question-subtext {
+  color: #cbd5e1 !important;
 }
 
-.has-bg-animation .price-label,
-.has-bg-animation .price-summary-label {
-  color: #475569 !important;
+.calc-page.has-bg-animation .option-desc,
+.calc-page.has-bg-animation .summary-question {
+  color: #aeb7c8 !important;
 }
 
-.has-bg-animation .price-value {
-  color: #0f172a !important;
+.calc-page.has-bg-animation .summary-form label {
+  color: #cbd5e1 !important;
+}
+
+.calc-page.has-bg-animation .price-label,
+.calc-page.has-bg-animation .price-summary-label,
+.calc-page.has-bg-animation .price-note {
+  color: #aeb7c8 !important;
+}
+
+.calc-page.has-bg-animation .price-value {
+  color: #ffffff !important;
+}
+
+.calc-page.has-bg-animation .answer-option.selected .option-label,
+.calc-page.has-bg-animation .answer-option.selected .option-desc {
+  color: #ffffff !important;
 }
 
 .landing.has-bg-animation .process-card-badge,

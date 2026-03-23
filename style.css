@@ -49,7 +49,120 @@ body {
 }
 
 .landing {
-  background: linear-gradient(180deg, #FAFBFC 0%, #F2F5F9 35%, #F6F8FC 70%, #F9FAFC 100%);
+  position: relative;
+  min-height: 100vh;
+}
+
+/* BackgroundAnimation — dark premium FloatingLines (ReactBits style) */
+.bg-animation-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  z-index: -10;
+  pointer-events: none;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 35%, rgba(60,25,90,0.35), transparent 35%),
+              linear-gradient(135deg, #050816 0%, #0a0f1f 45%, #160b22 100%);
+}
+
+.floating-lines-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  filter: blur(3px) brightness(1.05) contrast(1.02);
+}
+
+.bg-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(5, 8, 22, 0.25), rgba(8, 10, 20, 0.35));
+  pointer-events: none;
+}
+
+.bg-focus-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.4), transparent 60%);
+  pointer-events: none;
+}
+
+.has-bg-animation .container,
+.has-bg-animation .container-wide {
+  position: relative;
+  z-index: 1;
+}
+
+html:has(.has-bg-animation) {
+  background: #050816 !important;
+}
+
+.calc-page.has-bg-animation,
+.landing.has-bg-animation,
+.thank-you-page.has-bg-animation {
+  background: transparent !important;
+}
+
+/* Text contrast on dark background — premium SaaS */
+.has-bg-animation .hero h1,
+.has-bg-animation h2.section-title,
+.has-bg-animation .logo,
+.has-bg-animation .summary-title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+
+.has-bg-animation .hero-subline {
+  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.has-bg-animation .hero-intro,
+.has-bg-animation .calc-back,
+.has-bg-animation .calc-logo,
+.has-bg-animation .logo-tagline,
+.has-bg-animation .calculator-note,
+.has-bg-animation .price-note {
+  color: #cbd5f5 !important;
+}
+
+/* Card text — dark on light cards */
+.has-bg-animation .process-card h3,
+.has-bg-animation .process-card p,
+.has-bg-animation .collab-content h4,
+.has-bg-animation .collab-content p,
+.has-bg-animation .question-box h3,
+.has-bg-animation .option-label,
+.has-bg-animation .summary-question,
+.has-bg-animation .summary-answer,
+.has-bg-animation .service-content h4,
+.has-bg-animation .service-content p {
+  color: #0f172a !important;
+}
+
+.has-bg-animation .option-desc,
+.has-bg-animation .question-subtext {
+  color: #475569 !important;
+}
+
+.has-bg-animation .process-card-badge,
+.has-bg-animation .price-label,
+.has-bg-animation .price-summary-label {
+  color: #475569 !important;
+}
+
+.has-bg-animation .price-value {
+  color: #0f172a !important;
 }
 
 /* Layout */

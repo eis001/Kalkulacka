@@ -188,13 +188,14 @@
       <div class="summary-answers">${rowsHtml}</div>
       <div class="summary-form-section">
         <h4 class="summary-form-title">Odešlete poptávku</h4>
-        <form id="summary-form" class="summary-form">
+        <form id="summary-form" class="summary-form" method="POST" action="https://formsubmit.co/webyprokazdeho@gmail.com">
+          <input type="hidden" name="_subject" value="Nová poptávka z kalkulačky webu">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" id="hidden-next">
           <input type="hidden" name="final_one_time_price" id="hidden-one-time">
           <input type="hidden" name="final_monthly_price" id="hidden-monthly">
           <input type="hidden" name="summary_answers" id="hidden-summary">
-          <input type="hidden" name="_subject" value="Nová poptávka z kalkulačky EH STUDIO">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_captcha" value="false">
           <div class="form-group">
             <label for="form-jmeno">Jméno a příjmení <span class="required">*</span></label>
             <input type="text" id="form-jmeno" name="jmeno" required placeholder="Jan Novák">
@@ -222,39 +223,21 @@
           </div>
         </form>
       </div>
-      <div class="summary-success" id="summary-success" style="display:none">
-        <p class="summary-success-text">Děkujeme, ozveme se vám co nejdříve.</p>
-      </div>
     `;
   }
 
   function handleFormSubmit(e) {
-    e.preventDefault();
     const form = e.target;
+    form.action = 'https://formsubmit.co/webyprokazdeho@gmail.com';
+    form.method = 'POST';
     const totals = calculateTotal();
+    const nextInput = form.querySelector('#hidden-next');
+    if (nextInput) nextInput.value = new URL('thank-you.html', window.location.href).href;
     form.querySelector('#hidden-one-time').value = totals.oneTime.toLocaleString('cs-CZ') + ' Kč';
     form.querySelector('#hidden-monthly').value = totals.monthly > 0 ? totals.monthly.toLocaleString('cs-CZ') + ' Kč / měsíc' : '0 Kč';
     form.querySelector('#hidden-summary').value = getSummaryRows().map((r) => `${r.question} → ${r.answer}`).join('\n');
-
     const submitBtn = form.querySelector('.btn-submit');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Odesílám…';
-
-    fetch('https://formsubmit.co/ajax/webyprokazdeho@gmail.com', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(Object.fromEntries(new FormData(form)))
-    })
-      .then((res) => res.json())
-      .then(() => {
-        form.closest('.summary-form-section')?.style.setProperty('display', 'none');
-        document.getElementById('summary-success')?.style.setProperty('display', 'block');
-      })
-      .catch(() => {
-        alert('Něco se nepovedlo. Zkuste to prosím znovu.');
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Odeslat poptávku';
-      });
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Odesílám…'; }
   }
 
   function handleRestart() {

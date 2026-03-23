@@ -120,7 +120,7 @@ html:has(.has-bg-animation) {
 }
 
 .has-bg-animation .hero-subline {
-  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -175,8 +175,9 @@ html:has(.has-bg-animation) {
   color: #0f172a !important;
 }
 
-.landing.has-bg-animation .process-card-badge {
-  color: #a5b4fc !important;
+.landing.has-bg-animation .process-card-badge,
+.landing.has-bg-animation .process-card-badge-num {
+  color: white !important;
 }
 
 /* Layout */

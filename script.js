@@ -9,7 +9,6 @@
   const stepDotsContainer = document.getElementById('calc-step-dots');
   const btnBack = document.getElementById('calc-btn-back');
   const totalPriceEl = document.getElementById('total-price');
-  const btnOffer = document.getElementById('btn-offer');
 
   if (!stepsContainer || !totalPriceEl) return;
 
@@ -73,7 +72,37 @@
           ]
         }
       ]
-    }
+    },
+    {
+      id: 'social-media',
+      questions: [
+        {
+          id: 'social-media',
+          text: 'Jak zvládáte obsah na sociální sítě?',
+          subtext: 'Aktivní komunikace na sítích pomáhá budovat důvěru a přivádět nové zákazníky.',
+          options: [
+            { label: 'Zvládám to sám/sama', description: 'Přidávám obsah pravidelně a mám to pod kontrolou.', value: 0, variant: 'green' },
+            { label: 'Chci to nechat na někom jiném', description: 'Chci, aby se o obsah staral někdo za mě a fungovalo to dlouhodobě.', value: 5000, priceLabel: '+5 000 Kč / měsíc', variant: 'blue', priceStyle: 'pill', recurring: true },
+            { label: 'Sítě teď neřeším', description: 'Není to pro mě aktuálně priorita.', value: 0, variant: 'red' }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'graphics',
+      questions: [
+        {
+          id: 'graphics',
+          text: 'Potřebujete grafiku nebo vizuální materiály?',
+          subtext: 'Vizuály dělají první dojem – od bannerů až po obsah na sítě.',
+          options: [
+            { label: 'Mám vlastní materiály', description: 'Grafiku si řeším sám/sama nebo ji už mám hotovou.', value: 0, variant: 'green' },
+            { label: 'Chci vytvořit grafiku pomocí AI', description: 'Navrhneme moderní vizuály (např. bannery, posty, jednoduché grafiky) rychle a efektivně.', value: 4000, priceLabel: '+4 000 Kč', variant: 'blue', priceStyle: 'pill' }
+          ]
+        }
+      ]
+    },
+    { id: 'summary', type: 'summary' }
   ];
 
   let currentStep = 0;
@@ -82,8 +111,16 @@
   function renderStepContent(stepIndex) {
     const step = steps[stepIndex];
     const stepEl = document.createElement('div');
-    stepEl.className = `calc-step-content ${stepIndex === currentStep ? 'active' : ''}`;
+    stepEl.className = `calc-step-content${step.type === 'summary' ? ' calc-step-summary' : ''} ${stepIndex === currentStep ? 'active' : ''}`;
     stepEl.dataset.stepIndex = stepIndex;
+
+    if (step.type === 'summary') {
+      stepEl.innerHTML = renderSummaryHTML();
+      stepEl.querySelector('#summary-form')?.addEventListener('submit', handleFormSubmit);
+      stepEl.querySelector('.btn-edit-answers')?.addEventListener('click', () => showStep(steps.length - 2));
+      stepEl.querySelector('.btn-restart')?.addEventListener('click', handleRestart);
+      return stepEl;
+    }
 
     step.questions.forEach((q) => {
       const box = document.createElement('div');
@@ -120,6 +157,113 @@
     return stepEl;
   }
 
+  function getSummaryRows() {
+    const rows = [];
+    steps.forEach((step) => {
+      if (step.type === 'summary') return;
+      step.questions?.forEach((q) => {
+        const a = answers[q.id];
+        if (a && a.optionIndex !== undefined && q.options[a.optionIndex]) {
+          rows.push({ question: q.text, answer: q.options[a.optionIndex].label });
+        }
+      });
+    });
+    return rows;
+  }
+
+  function renderSummaryHTML() {
+    const rows = getSummaryRows();
+    const rowsHtml = rows.map((r) =>
+      `<div class="summary-row"><span class="summary-question">${r.question}</span><span class="summary-answer">${r.answer}</span></div>`
+    ).join('');
+
+    return `
+      <div class="summary-header">
+        <div class="summary-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3 class="summary-title">Hotovo. Tady je váš přehled.</h3>
+        <p class="summary-subtext">Na základě vašich odpovědí jsme připravili orientační přehled. Vyplňte kontakt a ozveme se vám.</p>
+      </div>
+      <div class="summary-answers">${rowsHtml}</div>
+      <div class="summary-form-section">
+        <h4 class="summary-form-title">Odešlete poptávku</h4>
+        <form id="summary-form" class="summary-form">
+          <input type="hidden" name="final_one_time_price" id="hidden-one-time">
+          <input type="hidden" name="final_monthly_price" id="hidden-monthly">
+          <input type="hidden" name="summary_answers" id="hidden-summary">
+          <input type="hidden" name="_subject" value="Nová poptávka z kalkulačky EH STUDIO">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <div class="form-group">
+            <label for="form-jmeno">Jméno a příjmení <span class="required">*</span></label>
+            <input type="text" id="form-jmeno" name="jmeno" required placeholder="Jan Novák">
+          </div>
+          <div class="form-group">
+            <label for="form-email">E-mail <span class="required">*</span></label>
+            <input type="email" id="form-email" name="email" required placeholder="jan@firma.cz">
+          </div>
+          <div class="form-group">
+            <label for="form-telefon">Telefon</label>
+            <input type="tel" id="form-telefon" name="telefon" placeholder="+420 123 456 789">
+          </div>
+          <div class="form-group">
+            <label for="form-firma">Firma / značka</label>
+            <input type="text" id="form-firma" name="firma" placeholder="Moje firma s.r.o.">
+          </div>
+          <div class="form-group">
+            <label for="form-poznamka">Poznámka</label>
+            <textarea id="form-poznamka" name="poznamka" rows="3" placeholder="Máte nějaké speciální požadavky?"></textarea>
+          </div>
+          <div class="summary-form-actions">
+            <button type="submit" class="btn-offer btn-submit">Odeslat poptávku</button>
+            <button type="button" class="calc-btn-nav btn-edit-answers">Upravit odpovědi</button>
+            <button type="button" class="btn-text btn-restart">Začít znovu</button>
+          </div>
+        </form>
+      </div>
+      <div class="summary-success" id="summary-success" style="display:none">
+        <p class="summary-success-text">Děkujeme, ozveme se vám co nejdříve.</p>
+      </div>
+    `;
+  }
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const totals = calculateTotal();
+    form.querySelector('#hidden-one-time').value = totals.oneTime.toLocaleString('cs-CZ') + ' Kč';
+    form.querySelector('#hidden-monthly').value = totals.monthly > 0 ? totals.monthly.toLocaleString('cs-CZ') + ' Kč / měsíc' : '0 Kč';
+    form.querySelector('#hidden-summary').value = getSummaryRows().map((r) => `${r.question} → ${r.answer}`).join('\n');
+
+    const submitBtn = form.querySelector('.btn-submit');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Odesílám…';
+
+    fetch('https://formsubmit.co/ajax/webyprokazdeho@gmail.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(Object.fromEntries(new FormData(form)))
+    })
+      .then((res) => res.json())
+      .then(() => {
+        form.closest('.summary-form-section')?.style.setProperty('display', 'none');
+        document.getElementById('summary-success')?.style.setProperty('display', 'block');
+      })
+      .catch(() => {
+        alert('Něco se nepovedlo. Zkuste to prosím znovu.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Odeslat poptávku';
+      });
+  }
+
+  function handleRestart() {
+    Object.keys(answers).forEach((k) => delete answers[k]);
+    renderAllSteps();
+    showStep(0);
+    updatePrice();
+  }
+
   function renderAllSteps() {
     stepsContainer.innerHTML = '';
     steps.forEach((_, i) => {
@@ -133,9 +277,13 @@
     stepsContainer.querySelectorAll('.calc-step-content').forEach((el, i) => {
       el.classList.toggle('active', i === index);
     });
-    restoreSelections(steps[index]);
+    const step = steps[index];
+    if (step && step.questions) restoreSelections(step);
+    const card = document.querySelector('.calculator-card');
+    if (card) card.classList.toggle('calc-card-summary', step?.type === 'summary');
     updateProgress();
     updateNavButtons();
+    updatePrice();
   }
 
   function restoreSelections(step) {
@@ -164,12 +312,41 @@
   }
 
   function calculateTotal() {
-    return Object.values(answers).reduce((sum, a) => sum + (a && a.value !== undefined ? a.value : 0), 0);
+    let oneTime = 0;
+    let monthly = 0;
+    steps.forEach((step) => {
+      if (step.type === 'summary') return;
+      step.questions?.forEach((q) => {
+        const a = answers[q.id];
+        if (!a || a.optionIndex === undefined) return;
+        const opt = q.options[a.optionIndex];
+        if (!opt) return;
+        if (opt.recurring) monthly += opt.value || 0;
+        else oneTime += opt.value || 0;
+      });
+    });
+    return { oneTime, monthly };
   }
 
   function updatePrice() {
-    const total = calculateTotal();
-    totalPriceEl.textContent = `${total.toLocaleString('cs-CZ')} Kč`;
+    const totals = calculateTotal();
+    const isSummary = steps[currentStep]?.type === 'summary';
+
+    const priceBoxDefault = document.getElementById('price-box-default');
+    const priceBoxSummary = document.getElementById('price-box-summary');
+    if (priceBoxDefault && priceBoxSummary) {
+      priceBoxDefault.style.display = isSummary ? 'none' : 'block';
+      priceBoxSummary.style.display = isSummary ? 'block' : 'none';
+      if (isSummary) {
+        const oneEl = priceBoxSummary.querySelector('.price-one-time-value');
+        const monthEl = priceBoxSummary.querySelector('.price-monthly-value');
+        if (oneEl) oneEl.textContent = totals.oneTime.toLocaleString('cs-CZ') + ' Kč';
+        if (monthEl) monthEl.textContent = totals.monthly > 0 ? totals.monthly.toLocaleString('cs-CZ') + ' Kč / měsíc' : '–';
+      }
+    }
+
+    const totalForDisplay = totals.oneTime + totals.monthly;
+    totalPriceEl.textContent = `${totalForDisplay.toLocaleString('cs-CZ')} Kč`;
     totalPriceEl.classList.remove('animate');
     void totalPriceEl.offsetWidth;
     totalPriceEl.classList.add('animate');
@@ -193,8 +370,10 @@
   }
 
   function updateNavButtons() {
+    const isSummary = steps[currentStep]?.type === 'summary';
     if (btnBack) btnBack.style.display = currentStep > 0 ? 'block' : 'none';
-    if (btnOffer) btnOffer.style.display = currentStep === steps.length - 1 ? 'inline-block' : 'none';
+    const footer = document.getElementById('calc-footer');
+    if (footer) footer.style.display = isSummary ? 'none' : 'block';
   }
 
   renderAllSteps();
@@ -204,12 +383,6 @@
   if (btnBack) {
     btnBack.addEventListener('click', () => {
       if (currentStep > 0) showStep(currentStep - 1);
-    });
-  }
-
-  if (btnOffer) {
-    btnOffer.addEventListener('click', () => {
-      alert('Děkujeme za zájem! Budeme vás co nejdříve kontaktovat.');
     });
   }
 })();

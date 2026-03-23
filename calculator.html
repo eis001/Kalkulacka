@@ -501,6 +501,240 @@
       from { opacity: 0; }
       to { opacity: 1; }
     }
+
+    /* ============================================
+       Summary Step — Dark gradient, form
+       ============================================ */
+    .calculator-card.calc-card-summary {
+      background: linear-gradient(160deg, #1e293b 0%, #0f172a 50%, #020617 100%);
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .calculator-card.calc-card-summary:hover {
+      transform: none;
+    }
+
+    .calc-card-summary .calc-step-dot {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .calc-card-summary .calc-step-dot.active {
+      background: #4ade80;
+    }
+
+    .calc-card-summary .calc-step-dot.completed {
+      background: rgba(74, 222, 128, 0.6);
+    }
+
+    .calculator-card.calc-card-summary .calc-progress-bar {
+      background: linear-gradient(90deg, #22c55e, #4ade80);
+    }
+
+    .calc-step-summary {
+      padding: 0.5rem 0;
+    }
+
+    .summary-header {
+      margin-bottom: 2rem;
+    }
+
+    .summary-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(34, 197, 94, 0.2);
+      color: #4ade80;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .summary-icon svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .calc-card-summary .summary-title {
+      font-size: clamp(1.5rem, 3vw, 1.875rem);
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 0.5rem;
+    }
+
+    .calc-card-summary .summary-subtext {
+      font-size: 1rem;
+      color: rgba(248, 250, 252, 0.7);
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    .summary-answers {
+      margin-bottom: 2.5rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .summary-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.75rem 1.5rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.9375rem;
+    }
+
+    .summary-row:last-child {
+      border-bottom: none;
+    }
+
+    .summary-question {
+      color: rgba(248, 250, 252, 0.6);
+      flex: 1;
+      min-width: 0;
+    }
+
+    .summary-answer {
+      color: #f8fafc;
+      font-weight: 600;
+      flex-shrink: 0;
+      text-align: right;
+    }
+
+    .summary-form-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .summary-form-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #f8fafc;
+      margin-bottom: 1.25rem;
+    }
+
+    .summary-form .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .summary-form label {
+      display: block;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: rgba(248, 250, 252, 0.9);
+      margin-bottom: 0.4rem;
+    }
+
+    .summary-form .required {
+      color: #f87171;
+    }
+
+    .summary-form input,
+    .summary-form textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      font-family: inherit;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #f8fafc;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .summary-form input::placeholder,
+    .summary-form textarea::placeholder {
+      color: rgba(248, 250, 252, 0.4);
+    }
+
+    .summary-form input:focus,
+    .summary-form textarea:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .summary-form textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .summary-form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.75rem;
+    }
+
+    .summary-form .btn-submit {
+      order: -1;
+    }
+
+    .btn-text {
+      background: none;
+      border: none;
+      font-size: 0.9375rem;
+      color: rgba(248, 250, 252, 0.6);
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0.25rem 0;
+      transition: color 0.2s;
+    }
+
+    .btn-text:hover {
+      color: #f8fafc;
+    }
+
+    .summary-success {
+      padding: 2rem 0;
+      text-align: center;
+    }
+
+    .summary-success-text {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #4ade80;
+    }
+
+    /* Price box summary variant */
+    .price-box-summary .price-summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.75rem;
+      gap: 1rem;
+    }
+
+    .price-box-summary .price-summary-label {
+      font-size: 0.9375rem;
+      color: #6b7280;
+      font-weight: 500;
+    }
+
+    .price-box-summary .price-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .price-box-summary .price-note {
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .summary-row {
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .summary-answer {
+        text-align: left;
+      }
+    }
   </style>
 </head>
 <body class="calc-page">
@@ -528,16 +762,21 @@
           </div>
 
           <div class="calculator-footer" id="calc-footer">
-            <button class="btn-offer" id="btn-offer" style="display: none">Chci nezávaznou nabídku</button>
             <p class="calculator-note">Cena je orientační. Finální nabídku doladíme podle rozsahu projektu.</p>
           </div>
         </div>
       </div>
 
       <div class="price-sticky">
-        <div class="price-box">
+        <div id="price-box-default" class="price-box">
           <p class="price-label">Odhadovaná cena</p>
           <p class="price-value" id="total-price">0 Kč</p>
+          <p class="price-note">Cena je orientační. Finální nabídku doladíme podle rozsahu projektu.</p>
+        </div>
+        <div id="price-box-summary" class="price-box price-box-summary" style="display: none">
+          <p class="price-label">Vaše cena</p>
+          <div class="price-summary-row"><span class="price-summary-label">Jednorázově</span><span class="price-one-time-value price-value">0 Kč</span></div>
+          <div class="price-summary-row"><span class="price-summary-label">Měsíčně</span><span class="price-monthly-value price-value">–</span></div>
           <p class="price-note">Cena je orientační. Finální nabídku doladíme podle rozsahu projektu.</p>
         </div>
       </div>

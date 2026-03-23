@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EH STUDIO — Weby, které přinášejí výsledky</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ============================================
+       Landing Page — Premium EH STUDIO
+       ============================================ */
+
+    .landing .container {
+      padding: 3rem 2rem;
+      max-width: 1040px;
+    }
+
+    @media (max-width: 640px) {
+      .landing .container {
+        padding: 2rem 1.25rem;
+      }
+    }
+
+    /* Header — Premium branding */
+    .landing .header {
+      margin-bottom: 5rem;
+    }
+
+    .landing .header-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    /* Typography: brand / logo */
+    .landing .logo {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--color-text);
+      text-decoration: none;
+      line-height: 1;
+      transition: opacity 0.2s ease;
+    }
+
+    @media (max-width: 640px) {
+      .landing .logo { font-size: 1.875rem; letter-spacing: 0.06em; }
+    }
+
+    .landing .logo:hover { opacity: 0.85; }
+
+    .landing .logo-tagline {
+      font-size: var(--text-micro);
+      font-weight: 600;
+      color: var(--color-accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    /* Hero — with subtle background glow */
+    .landing .hero {
+      margin-bottom: 5rem;
+      position: relative;
+    }
+
+    .landing .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120%;
+      max-width: 800px;
+      height: 80%;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .landing .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Typography: H1 hero — dominant */
+    .landing .hero h1 {
+      font-size: var(--text-hero);
+      font-weight: 800;
+      line-height: var(--leading-tight);
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      color: var(--color-text);
+    }
+
+    @media (max-width: 640px) {
+      .landing .hero h1 {
+        font-size: clamp(2rem, 8vw, 2.5rem);
+        line-height: 1.18;
+      }
+    }
+
+    /* Typography: secondary headline */
+    .landing .hero-subline {
+      font-size: 1.3125rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      margin-bottom: 0.875rem;
+      line-height: var(--leading-snug);
+    }
+
+    @media (max-width: 640px) {
+      .landing .hero-subline { font-size: 1.125rem; }
+    }
+
+    /* Typography: body intro */
+    .landing .hero-intro {
+      font-size: 1.125rem;
+      font-weight: 400;
+      color: var(--color-text-secondary);
+      max-width: 520px;
+      margin-bottom: 3.5rem;
+      line-height: var(--leading-relaxed);
+    }
+
+    @media (max-width: 640px) {
+      .landing .hero-intro { font-size: 1.0625rem; }
+    }
+
+    /* Process cards — Premium creative studio */
+    .landing .process-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+      margin-bottom: 3.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .landing .process-cards {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+    }
+
+    .landing .process-card {
+      background: rgba(252, 253, 255, 0.9);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 4px 20px rgba(0, 0, 0, 0.04);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    }
+
+    @media (min-width: 769px) {
+      .landing .process-card {
+        padding: 1.75rem 1.875rem;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .landing .process-card {
+        padding: 2rem 2rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .landing .process-card {
+        padding: 2rem 2.25rem;
+      }
+    }
+
+    .landing .process-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06), 0 20px 48px rgba(0, 0, 0, 0.06);
+      border-color: rgba(59, 130, 246, 0.2);
+      background: rgba(255, 255, 255, 0.97);
+    }
+
+    .landing .process-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .landing .process-card-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(59, 130, 246, 0.08);
+      border-radius: 10px;
+      color: var(--color-accent);
+    }
+
+    .landing .process-card-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .landing .process-card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.15);
+      border-radius: 999px;
+    }
+
+    .landing .process-card-badge-num {
+      font-size: 0.75rem;
+      color: var(--color-accent);
+    }
+
+    /* Typography: card titles */
+    .landing .process-card h3 {
+      font-size: 1.3125rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 0.625rem;
+      line-height: var(--leading-snug);
+    }
+
+    /* Typography: card body */
+    .landing .process-card p {
+      font-size: var(--text-body);
+      font-weight: 400;
+      color: var(--color-text-secondary);
+      line-height: 1.65;
+    }
+
+    /* CTA — prominent, premium */
+    .landing .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem 3rem;
+      background: linear-gradient(135deg, #5B9BF9 0%, var(--color-accent) 50%, #2563EB 100%);
+      color: white;
+      font-size: 1.1875rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4), 0 1px 3px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 640px) {
+      .landing .btn-cta { font-size: 1.0625rem; padding: 1.125rem 2.5rem; }
+    }
+
+    .landing .btn-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(59, 130, 246, 0.45), 0 4px 8px rgba(0, 0, 0, 0.06);
+      background: linear-gradient(135deg, #6BA5FA 0%, #5B9BF9 50%, var(--color-accent) 100%);
+    }
+
+    .landing .btn-cta:active {
+      transform: translateY(-1px);
+    }
+
+    /* Sections */
+    .landing .section {
+      margin-bottom: 5rem;
+    }
+
+    .landing .section:last-of-type {
+      margin-bottom: 4rem;
+    }
+
+    /* Typography: section titles — unified */
+    .landing .section-title {
+      font-size: var(--text-section);
+      font-weight: 700;
+      color: var(--color-accent);
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+      line-height: var(--leading-snug);
+    }
+
+    @media (max-width: 640px) {
+      .landing .section-title { font-size: 1.375rem; }
+    }
+
+    /* Section cards — elevated, layered depth */
+    .landing .card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(229, 231, 235, 0.9);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 8px 24px rgba(0, 0, 0, 0.05);
+      transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .landing .card:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04), 0 20px 40px rgba(0, 0, 0, 0.08);
+      border-color: rgba(203, 213, 225, 0.9);
+    }
+
+    /* Jak spolupracujeme — process cards */
+    .landing .collab-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    .landing .collab-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      background: #FFFFFF;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: 16px;
+      padding: 1.5rem 1.75rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 12px rgba(0, 0, 0, 0.04);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    @media (min-width: 640px) {
+      .landing .collab-item {
+        padding: 1.625rem 2rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .landing .collab-item {
+        padding: 1.75rem 2.25rem;
+      }
+    }
+
+    .landing .collab-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06), 0 16px 40px rgba(0, 0, 0, 0.04);
+      border-color: rgba(59, 130, 246, 0.2);
+    }
+
+    /* Typography: collab step numbers — gradient badge */
+    .landing .collab-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: white;
+      background: linear-gradient(135deg, #5B9BF9 0%, var(--color-accent) 50%, #2563EB 100%);
+      border-radius: 12px;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
+    }
+
+    /* Typography: item titles */
+    .landing .collab-content h4 {
+      font-size: 1.3125rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+      line-height: var(--leading-snug);
+    }
+
+    /* Typography: item body */
+    .landing .collab-content p {
+      font-size: 1.0625rem;
+      font-weight: 400;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    /* Další služby — service cards 2x2 */
+    .landing .section-services .section-title {
+      margin-bottom: 2rem;
+    }
+
+    .landing .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .landing .services-grid {
+        gap: 1.75rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .landing .services-grid {
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .landing .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+    }
+
+    .landing .service-item {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      background: #FFFFFF;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: 18px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 12px rgba(0, 0, 0, 0.04);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    @media (min-width: 640px) {
+      .landing .service-item {
+        padding: 1.625rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .landing .service-item {
+        padding: 1.75rem 2rem;
+      }
+    }
+
+    .landing .service-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06), 0 16px 40px rgba(0, 0, 0, 0.04);
+      border-color: rgba(59, 130, 246, 0.2);
+    }
+
+    .landing .service-item:hover .service-icon {
+      transform: scale(1.05);
+    }
+
+    .landing .service-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.15);
+      border-radius: 12px;
+      color: var(--color-accent);
+      transition: transform 0.25s ease;
+    }
+
+    .landing .service-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Typography: service titles */
+    .landing .service-content h4 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 0.375rem;
+      line-height: var(--leading-snug);
+    }
+
+    /* Typography: service body */
+    .landing .service-content p {
+      font-size: 1.0625rem;
+      font-weight: 400;
+      color: var(--color-text-secondary);
+      line-height: 1.65;
+    }
+  </style>
+</head>
+<body class="landing">
+  <div class="container">
+    <header class="header">
+      <div class="header-brand">
+        <a href="index.html" class="logo">EH STUDIO</a>
+        <p class="logo-tagline">creative studio</p>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h1>Weby, které přinášejí výsledky</h1>
+      <p class="hero-subline">Tvorba webů na míru — od návrhu po spuštění.</p>
+      <p class="hero-intro">Pro jednotlivce a podniky, které chtějí web, co dává smysl.</p>
+
+      <div class="process-cards">
+        <div class="process-card">
+          <div class="process-card-header">
+            <div class="process-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+            </div>
+            <span class="process-card-badge"><span class="process-card-badge-num">1</span> Krok</span>
+          </div>
+          <h3>Rychlý start</h3>
+          <p>Probereme vaše cíle a představu. Vytvoříme plán a rozpočet.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-card-header">
+            <div class="process-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                <polyline points="2 17 12 22 22 17"/>
+              </svg>
+            </div>
+            <span class="process-card-badge"><span class="process-card-badge-num">2</span> Krok</span>
+          </div>
+          <h3>Design a vývoj</h3>
+          <p>Navrhneme vizuální styl a vytvoříme web na míru.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-card-header">
+            <div class="process-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 2L11 13"/>
+                <path d="M22 2l-7 22-4-9-9-4 22-7z"/>
+              </svg>
+            </div>
+            <span class="process-card-badge"><span class="process-card-badge-num">3</span> Krok</span>
+          </div>
+          <h3>Spuštění</h3>
+          <p>Nasadíme web, otestujeme a předáme. S vámi na cestě.</p>
+        </div>
+      </div>
+
+      <a href="calculator.html" class="btn-cta">Jdeme na to</a>
+    </section>
+
+    <section class="section section-collab">
+      <h2 class="section-title">Jak spolupracujeme</h2>
+      <div class="collab-list">
+        <div class="collab-item">
+          <span class="collab-num">1</span>
+          <div class="collab-content">
+            <h4>Konzultace a analýza</h4>
+            <p>Společně zmapujeme vaše potřeby a cílovou skupinu.</p>
+          </div>
+        </div>
+        <div class="collab-item">
+          <span class="collab-num">2</span>
+          <div class="collab-content">
+            <h4>Návrh a schválení</h4>
+            <p>Představíme design a strukturu webu před samotným vývojem.</p>
+          </div>
+        </div>
+        <div class="collab-item">
+          <span class="collab-num">3</span>
+          <div class="collab-content">
+            <h4>Vývoj a obsah</h4>
+            <p>Vytvoříme web a připravíme obsah. Průběžně řešíme zpětnou vazbu.</p>
+          </div>
+        </div>
+        <div class="collab-item">
+          <span class="collab-num">4</span>
+          <div class="collab-content">
+            <h4>Spuštění a podpora</h4>
+            <p>Web nasadíme do provozu a nabídneme školení i další podporu.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-services">
+      <h2 class="section-title">Další služby</h2>
+      <div class="services-grid">
+        <div class="service-item">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a10 10 0 1 1 0 20"/>
+              <circle cx="12" cy="6" r="2"/>
+              <circle cx="17" cy="11" r="2"/>
+              <circle cx="12" cy="16" r="2"/>
+              <circle cx="7" cy="11" r="2"/>
+            </svg>
+          </div>
+          <div class="service-content">
+            <h4>Grafika a vizuál</h4>
+            <p>Loga, ilustrace a grafické prvky pro váš web.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </div>
+          <div class="service-content">
+            <h4>Obsah & texty</h4>
+            <p>Copywriting a texty na míru pro vaše stránky.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <div class="service-content">
+            <h4>Hosting a domény</h4>
+            <p>Pomůžeme s výběrem a nastavením hostingu.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 4 23 10 17 10"/>
+              <polyline points="1 20 1 14 7 14"/>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+            </svg>
+          </div>
+          <div class="service-content">
+            <h4>Údržba a aktualizace</h4>
+            <p>Pravidelná aktualizace a technická podpora.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

@@ -244,32 +244,40 @@
     const note = form.querySelector('[name="poznamka"]')?.value?.trim() || '';
     const summaryAnswers = getSummaryRows().map((r) => ({ question: r.question, answer: r.answer }));
 
+    console.log({ name, email, phone, company, note, price: finalPrice, answers: summaryAnswers });
+
     fetch('https://script.google.com/macros/s/AKfycbyB_iTiqeNs3JvIRTrQbVR-arMJPyAFTXOaic4zQhGqkeyfq4HlaZ9AqkazqUoRak1F/exec', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8'
+      },
       body: JSON.stringify({
-        name: name,
-        email: email,
-        phone: phone,
-        company: company,
-        note: note,
-        price: finalPrice,
-        answers: summaryAnswers
+        name: name || '',
+        email: email || '',
+        phone: phone || '',
+        company: company || '',
+        note: note || '',
+        price: finalPrice || '',
+        answers: summaryAnswers || []
       })
     })
-      .then((res) => {
-        if (!res.ok) throw new Error('Request failed');
-        const ct = res.headers.get('content-type');
-        if (ct && ct.includes('application/json')) return res.json();
-        return {};
+      .then(async (res) => {
+        const text = await res.text();
+        console.log('RAW RESPONSE:', text);
+        if (!res.ok) {
+          throw new Error('HTTP ' + res.status + ' - ' + text);
+        }
+        return text ? JSON.parse(text) : { success: true };
       })
-      .then(() => {
+      .then((data) => {
+        console.log('SUCCESS:', data);
         const success = document.createElement('div');
         success.className = 'summary-success';
         success.innerHTML = '<p class="summary-success-text">Děkujeme, ozveme se vám co nejdříve.</p>';
         formSection.replaceWith(success);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error('FORM ERROR:', err);
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Odeslat poptávku';

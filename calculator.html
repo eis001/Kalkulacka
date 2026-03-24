@@ -168,6 +168,9 @@
       align-items: flex-start;
       justify-content: space-between;
       gap: 0.875rem;
+      width: 100%;
+      box-sizing: border-box;
+      font: inherit;
       text-align: left;
       padding: 16px 18px;
       font-size: 1rem;
@@ -352,6 +355,103 @@
       line-height: 1.5;
     }
 
+    /* Pravý panel — jeden sloupec (odhad + souhrn), stejné řádky label | hodnota */
+    .price-box .price-final-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .price-box .price-final-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem 1.5rem;
+      padding: 0.55rem 0;
+    }
+
+    .price-box .price-final-label {
+      flex-shrink: 0;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: rgba(174, 183, 200, 0.85);
+      letter-spacing: 0.02em;
+      max-width: 46%;
+    }
+
+    .price-box .price-final-label--hero {
+      color: rgba(226, 232, 240, 0.95);
+      font-size: 0.875rem;
+    }
+
+    .price-box .price-final-rule {
+      height: 1px;
+      margin: 0;
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+    }
+
+    .price-box .price-final-competitor {
+      display: inline-flex;
+      align-items: baseline;
+      justify-content: flex-end;
+      gap: 0.45rem;
+      flex-shrink: 0;
+      text-align: right;
+    }
+
+    .price-box .price-final-x {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: rgba(248, 113, 113, 0.48);
+      line-height: 1;
+      flex-shrink: 0;
+      position: relative;
+      top: 0.05em;
+    }
+
+    .price-box .price-final-competitor-num {
+      font-size: clamp(1.0625rem, 2.4vw, 1.375rem);
+      font-weight: 700;
+      color: rgba(248, 113, 113, 0.75);
+      text-decoration: line-through;
+      text-decoration-color: rgba(248, 113, 113, 0.38);
+      white-space: nowrap;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+
+    .price-box .price-final-hero.price-value {
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+      font-weight: 800;
+      color: #ffffff;
+      white-space: nowrap;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      text-align: right;
+      text-shadow: 0 1px 20px rgba(255, 255, 255, 0.05);
+    }
+
+    .price-box .price-final-hero.price-value.animate {
+      animation: pricePulse 0.4s ease;
+    }
+
+    .price-box .price-final-monthly.price-value {
+      font-size: clamp(1.1875rem, 2.6vw, 1.4375rem);
+      font-weight: 700;
+      color: #f1f5f9;
+      white-space: nowrap;
+      letter-spacing: -0.02em;
+      text-align: right;
+      line-height: 1.2;
+    }
+
+    .price-box .price-note.price-final-footnote {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
 
     /* Calculator footer */
     .calculator-footer {
@@ -486,8 +586,8 @@
     .calc-step-summary { padding: 0; }
 
     .summary-header {
-      margin-bottom: 2.5rem;
-      padding-bottom: 2rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
@@ -526,11 +626,11 @@
     }
 
     .summary-answers {
-      margin-bottom: 1rem;
-      padding: 1.5rem 1.5rem;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 14px;
+      margin-bottom: 0;
+      padding: 0;
+      background: none;
+      border: none;
+      border-radius: 0;
     }
 
     .summary-row {
@@ -539,8 +639,8 @@
       justify-content: space-between;
       align-items: flex-start;
       gap: 0.75rem 2rem;
-      padding: 1.125rem 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 0.85rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
       font-size: 0.9375rem;
     }
 
@@ -566,13 +666,16 @@
 
     .summary-form-section {
       margin-bottom: 0;
+      margin-top: 0;
+      padding-top: 1.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .summary-form-title {
       font-size: 1.125rem;
       font-weight: 600;
       color: #ffffff;
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
       letter-spacing: -0.01em;
     }
 
@@ -729,39 +832,12 @@
       color: #aeb7c8;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 1rem;
+      margin-bottom: 0.85rem;
     }
 
-    .price-box-summary .price-summary-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 0.75rem;
-      gap: 1.5rem;
-      padding: 0.5rem 0;
-    }
-
-    .price-box-summary .price-summary-row:first-of-type { padding-top: 0; }
-
-    .price-box-summary .price-summary-label {
-      font-size: 0.875rem;
-      color: #aeb7c8;
-      font-weight: 500;
-    }
-
-    .price-box-summary .price-value {
-      font-size: 1.375rem;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: -0.02em;
-    }
-
-    .price-box-summary .price-note {
-      margin-top: 1.25rem;
-      padding-top: 1.25rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      font-size: 0.875rem;
-      line-height: 1.5;
+    .price-box-summary .price-note.price-final-footnote {
+      font-size: 0.8125rem;
+      line-height: 1.55;
       color: #aeb7c8;
     }
 
@@ -807,7 +883,7 @@
       <div class="calculator-main">
         <div class="calculator-card">
           <div class="calc-progress">
-            <div class="calc-progress-bar" id="calc-progress-bar" style="width: 33%"></div>
+            <div class="calc-progress-bar" id="calc-progress-bar" style="width: 16.67%"></div>
           </div>
           <div class="calc-step-indicators" id="calc-step-dots"></div>
           <div id="calculator-steps"></div>
@@ -825,14 +901,49 @@
       <div class="price-sticky">
         <div id="price-box-default" class="price-box">
           <p class="price-label">Odhadovaná cena</p>
-          <p class="price-value" id="total-price">0 Kč</p>
-          <p class="price-note">Cena je orientační. Finální nabídku doladíme podle rozsahu projektu.</p>
+          <div class="price-final-stack">
+            <div class="price-final-row">
+              <span class="price-final-label">Cena konkurence</span>
+              <div class="price-final-competitor">
+                <span class="price-final-x" aria-hidden="true">✕</span>
+                <span class="price-final-competitor-num" id="price-competitor-value">≈ 0 Kč</span>
+              </div>
+            </div>
+            <div class="price-final-rule" aria-hidden="true"></div>
+            <div class="price-final-row">
+              <span class="price-final-label price-final-label--hero">Naše cena</span>
+              <span class="price-value price-final-hero" id="total-price">0 Kč</span>
+            </div>
+            <div class="price-final-rule" aria-hidden="true"></div>
+            <div class="price-final-row">
+              <span class="price-final-label">Měsíčně</span>
+              <span class="price-value price-final-monthly price-default-monthly">–</span>
+            </div>
+          </div>
+          <p class="price-note price-final-footnote">Cena je orientační. Finální nabídku doladíme podle rozsahu projektu.</p>
         </div>
         <div id="price-box-summary" class="price-box price-box-summary" style="display: none">
           <p class="price-label">Vaše cena</p>
-          <div class="price-summary-row"><span class="price-summary-label">Jednorázově</span><span class="price-one-time-value price-value">0 Kč</span></div>
-          <div class="price-summary-row"><span class="price-summary-label">Měsíčně</span><span class="price-monthly-value price-value">–</span></div>
-          <p class="price-note">Cena je orientační. Finální nabídku doladíme podle rozsahu projektu.</p>
+          <div class="price-final-stack">
+            <div class="price-final-row">
+              <span class="price-final-label">Cena konkurence</span>
+              <div class="price-final-competitor">
+                <span class="price-final-x" aria-hidden="true">✕</span>
+                <span class="price-final-competitor-num" id="price-competitor-summary-value">≈ 0 Kč</span>
+              </div>
+            </div>
+            <div class="price-final-rule" aria-hidden="true"></div>
+            <div class="price-final-row">
+              <span class="price-final-label price-final-label--hero">Naše cena</span>
+              <span class="price-value price-final-hero price-one-time-value">0 Kč</span>
+            </div>
+            <div class="price-final-rule" aria-hidden="true"></div>
+            <div class="price-final-row">
+              <span class="price-final-label">Měsíčně</span>
+              <span class="price-value price-final-monthly price-monthly-value">–</span>
+            </div>
+          </div>
+          <p class="price-note price-final-footnote">Cena je orientační. Finální nabídku doladíme podle rozsahu projektu.</p>
         </div>
       </div>
     </div>

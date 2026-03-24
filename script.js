@@ -14,46 +14,26 @@
 
   const steps = [
     {
-      id: 'strategy',
-      questions: [
-        {
-          id: 'strategy',
-          text: 'Máte jasno, co má váš web přinést?',
-          subtext: 'Pomůžeme vám ujasnit, komu prodáváte, co říkáte a proč by si měl zákazník vybrat právě vás.',
-          options: [
-            { label: 'Ano, mám jasno', description: 'Vím, koho oslovuji a co chci webem dosáhnout.', value: 0, variant: 'green' },
-            { label: 'Pomozte mi to nastavit', description: 'Chci jednoduchou strategii, která mi pomůže web postavit správně od začátku.', value: 3000, priceLabel: '+3 000 Kč', variant: 'blue' },
-            { label: 'Strategii teď neřeším', description: 'Chci jen web a zbytek doladím později.', value: 0, variant: 'red' }
-          ]
-        }
-      ]
-    },
-    {
-      id: 'logo',
-      questions: [
-        {
-          id: 'logo',
-          text: 'Máte už hotové logo?',
-          subtext: 'Logo je často první věc, podle které si zákazník vytvoří dojem o vaší značce.',
-          options: [
-            { label: 'Ano, logo už mám', description: 'Stačí ho použít v novém webu.', value: 0, variant: 'green' },
-            { label: 'Chci nové logo', description: 'Navrhneme jednoduché, moderní logo, které bude fungovat na webu i jinde.', value: 3000, priceLabel: '+3 000 Kč', variant: 'blue', priceStyle: 'pill' },
-            { label: 'Zatím to neřeším', description: 'Logo teď není priorita, řeším hlavně funkční web.', value: 0, variant: 'red' }
-          ]
-        }
-      ]
-    },
-    {
       id: 'web-satisfaction',
       questions: [
         {
           id: 'web-satisfaction',
-          text: 'Jak jste spokojení se svým webem?',
-          subtext: 'Web je často první místo, kam si zákazník jde ověřit, kdo jste a co nabízíte.',
+          text: 'Jak jste na tom aktuálně s webem?',
           options: [
-            { label: 'Web mám, chci ho zkontrolovat', description: 'Potřebuji rychlý audit a návrhy na zlepšení.', value: 2000, priceLabel: '+2 000 Kč', variant: 'green', priceStyle: 'pill' },
-            { label: 'Chci nový nebo lepší web', description: 'Současný web mi nestačí nebo potřebuji modernější řešení.', value: 5000, priceLabel: '+5 000 Kč', variant: 'blue', priceStyle: 'pill' },
-            { label: 'Web teď neřeším', description: 'Momentálně to není priorita.', value: 0, variant: 'red' }
+            {
+              label: 'Chci nový nebo výrazně lepší web',
+              description: 'Potřebuji moderní řešení, které přivádí zákazníky.',
+              value: 5000,
+              priceLabel: '+5 000 Kč',
+              variant: 'blue',
+              priceStyle: 'pill'
+            },
+            {
+              label: 'Chci využít vaše další služby (AI, grafika, správa)',
+              description: 'Zajímá mě AI chatbot, grafika nebo správa webu.',
+              value: 0,
+              variant: 'default'
+            }
           ]
         }
       ]
@@ -66,38 +46,103 @@
           text: 'Jak rozsáhlý web potřebujete?',
           subtext: 'Rozsah webu ovlivňuje množství obsahu, strukturu i celkovou náročnost.',
           options: [
-            { label: 'Stačí mi jedna stránka', description: 'Jednoduchý web, kde je vše přehledně na jednom místě.', value: 0, variant: 'green' },
-            { label: 'Potřebuji více stránek (5+)', description: 'Služby, o nás, kontakt a další podstránky.', value: 7000, priceLabel: '+7 000 Kč', variant: 'blue', priceStyle: 'pill' },
-            { label: 'Potřebuji rozsáhlejší web', description: 'Větší projekt s více sekcemi a detailnějším obsahem.', value: 15000, priceLabel: '+15 000 Kč', variant: 'blue', priceStyle: 'pill' }
+            {
+              label: 'Landing page',
+              description: 'Jednostránkový web zaměřený na jasnou prezentaci a získávání klientů.',
+              value: 0,
+              variant: 'green'
+            },
+            {
+              label: 'Rozsáhlejší web + 3 stránky',
+              description: 'Více podstránek (např. služby, o nás, kontakt) pro lepší prezentaci a důvěryhodnost.',
+              value: 3000,
+              priceLabel: '+3 000 Kč',
+              variant: 'blue',
+              priceStyle: 'pill'
+            }
           ]
         }
       ]
     },
     {
-      id: 'social-media',
+      id: 'brand-visual',
       questions: [
         {
-          id: 'social-media',
-          text: 'Jak zvládáte obsah na sociální sítě?',
-          subtext: 'Aktivní komunikace na sítích pomáhá budovat důvěru a přivádět nové zákazníky.',
+          id: 'brand-visual',
+          text: 'Máte už grafiku a logo pro váš web?',
           options: [
-            { label: 'Zvládám to sám/sama', description: 'Přidávám obsah pravidelně a mám to pod kontrolou.', value: 0, variant: 'green' },
-            { label: 'Chci to nechat na někom jiném', description: 'Chci, aby se o obsah staral někdo za mě a fungovalo to dlouhodobě.', value: 5000, priceLabel: '+5 000 Kč / měsíc', variant: 'blue', priceStyle: 'pill', recurring: true },
-            { label: 'Sítě teď neřeším', description: 'Není to pro mě aktuálně priorita.', value: 0, variant: 'red' }
+            {
+              label: 'Chci grafiku na míru včetně loga',
+              description: 'Vytvoříme vám kompletní vizuální styl – logo, barvy i grafiku pro web.',
+              value: 4000,
+              priceLabel: '+4 000 Kč',
+              variant: 'blue',
+              priceStyle: 'pill'
+            },
+            {
+              label: 'Ano, grafiku už mám',
+              description: 'Použijeme vaše podklady a přizpůsobíme je webu.',
+              value: 0,
+              variant: 'green'
+            },
+            {
+              label: 'Grafiku teď neřeším',
+              description: 'Zaměříme se jen na funkční web bez řešení vizuální identity.',
+              value: 0,
+              variant: 'red'
+            }
           ]
         }
       ]
     },
     {
-      id: 'graphics',
+      id: 'ai-chatbot',
       questions: [
         {
-          id: 'graphics',
-          text: 'Potřebujete grafiku nebo vizuální materiály?',
-          subtext: 'Vizuály dělají první dojem – od bannerů až po obsah na sítě.',
+          id: 'ai-chatbot',
+          text: 'Chcete mít na webu chytrého asistenta, který komunikuje se zákazníky za vás?',
           options: [
-            { label: 'Mám vlastní materiály', description: 'Grafiku si řeším sám/sama nebo ji už mám hotovou.', value: 0, variant: 'green' },
-            { label: 'Chci vytvořit grafiku pomocí AI', description: 'Navrhneme moderní vizuály (např. bannery, posty, jednoduché grafiky) rychle a efektivně.', value: 4000, priceLabel: '+4 000 Kč', variant: 'blue', priceStyle: 'pill' }
+            {
+              label: 'Ano, chci AI chatbota (doporučeno)',
+              description:
+                'AI chatbot bude odpovídat na dotazy návštěvníků, pomůže jim s orientací na webu a nasměruje je k objednávce nebo kontaktu. Funguje 24/7 a šetří váš čas.',
+              value: 2500,
+              priceLabel: '+2 500 Kč',
+              variant: 'blue',
+              priceStyle: 'pill'
+            },
+            {
+              label: 'Stačí mi klasický web',
+              description: 'Bez automatické komunikace.',
+              value: 0,
+              variant: 'default'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'web-support',
+      questions: [
+        {
+          id: 'web-support',
+          text: 'Chcete mít web bez starostí i po spuštění?',
+          options: [
+            {
+              label: 'Ano, chci správu a podporu (doporučeno)',
+              description: 'Postaráme se o web, úpravy i případné problémy. Máte jistotu, že vše funguje.',
+              value: 500,
+              recurring: true,
+              priceLabel: '500 Kč / měsíc',
+              variant: 'blue',
+              priceStyle: 'pill'
+            },
+            {
+              label: 'Ne, budu si web spravovat sám',
+              description: '',
+              value: 0,
+              variant: 'default'
+            }
           ]
         }
       ]
@@ -140,7 +185,7 @@
         btn.innerHTML = `
           <span class="option-content">
             <span class="option-label">${opt.label}</span>
-            <span class="option-desc">${opt.description}</span>
+            ${opt.description ? `<span class="option-desc">${opt.description}</span>` : ''}
             ${priceBadge}
           </span>
           <span class="option-check" aria-hidden="true">
@@ -244,8 +289,6 @@
     const note = form.querySelector('[name="poznamka"]')?.value?.trim() || '';
     const summaryAnswers = getSummaryRows().map((r) => ({ question: r.question, answer: r.answer }));
 
-    console.log({ name, email, phone, company, note, price: finalPrice, answers: summaryAnswers });
-
     fetch('https://script.google.com/macros/s/AKfycbyB_iTiqeNs3JvIRTrQbVR-arMJPyAFTXOaic4zQhGqkeyfq4HlaZ9AqkazqUoRak1F/exec', {
       method: 'POST',
       headers: {
@@ -258,26 +301,25 @@
         company: company || '',
         note: note || '',
         price: finalPrice || '',
-        answers: summaryAnswers || []
+        answers: summaryAnswers || [],
+        chatbot: answers.chatbot === true,
+        support: answers.support === true
       })
     })
       .then(async (res) => {
         const text = await res.text();
-        console.log('RAW RESPONSE:', text);
         if (!res.ok) {
-          throw new Error('HTTP ' + res.status + ' - ' + text);
+          throw new Error('HTTP ' + res.status);
         }
         return text ? JSON.parse(text) : { success: true };
       })
-      .then((data) => {
-        console.log('SUCCESS:', data);
+      .then(() => {
         const success = document.createElement('div');
         success.className = 'summary-success';
         success.innerHTML = '<p class="summary-success-text">Děkujeme, ozveme se vám co nejdříve.</p>';
         formSection.replaceWith(success);
       })
-      .catch((err) => {
-        console.error('FORM ERROR:', err);
+      .catch(() => {
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Odeslat poptávku';
@@ -334,6 +376,12 @@
 
   function selectAnswer(questionId, value, optionIndex, optionsContainer, selectedBtn) {
     answers[questionId] = { value, optionIndex };
+    if (questionId === 'ai-chatbot') {
+      answers.chatbot = optionIndex === 0;
+    }
+    if (questionId === 'web-support') {
+      answers.support = optionIndex === 0;
+    }
     optionsContainer.querySelectorAll('.answer-option').forEach((btn) => btn.classList.remove('selected'));
     selectedBtn.classList.add('selected');
     updatePrice();
@@ -372,17 +420,36 @@
       if (isSummary) {
         const oneEl = priceBoxSummary.querySelector('.price-one-time-value');
         const monthEl = priceBoxSummary.querySelector('.price-monthly-value');
+        const competitorSummaryEl = document.getElementById('price-competitor-summary-value');
         if (oneEl) oneEl.textContent = totals.oneTime.toLocaleString('cs-CZ') + ' Kč';
+        if (competitorSummaryEl) {
+          competitorSummaryEl.textContent =
+            '≈ ' + (totals.oneTime * 4).toLocaleString('cs-CZ') + ' Kč';
+        }
         if (monthEl) monthEl.textContent = totals.monthly > 0 ? totals.monthly.toLocaleString('cs-CZ') + ' Kč / měsíc' : '–';
+      } else {
+        const monthDefault = priceBoxDefault.querySelector('.price-default-monthly');
+        const competitorEl = document.getElementById('price-competitor-value');
+        if (totalPriceEl) totalPriceEl.textContent = totals.oneTime.toLocaleString('cs-CZ') + ' Kč';
+        if (competitorEl) {
+          const competitor = totals.oneTime * 4;
+          competitorEl.textContent = '≈ ' + competitor.toLocaleString('cs-CZ') + ' Kč';
+        }
+        if (monthDefault) {
+          monthDefault.textContent = totals.monthly > 0 ? totals.monthly.toLocaleString('cs-CZ') + ' Kč / měsíc' : '–';
+        }
       }
     }
 
-    const totalForDisplay = totals.oneTime + totals.monthly;
-    totalPriceEl.textContent = `${totalForDisplay.toLocaleString('cs-CZ')} Kč`;
-    totalPriceEl.classList.remove('animate');
-    void totalPriceEl.offsetWidth;
-    totalPriceEl.classList.add('animate');
-    totalPriceEl.addEventListener('animationend', () => totalPriceEl.classList.remove('animate'), { once: true });
+    const animateEl = isSummary
+      ? priceBoxSummary?.querySelector('.price-one-time-value')
+      : totalPriceEl;
+    if (animateEl) {
+      animateEl.classList.remove('animate');
+      void animateEl.offsetWidth;
+      animateEl.classList.add('animate');
+      animateEl.addEventListener('animationend', () => animateEl.classList.remove('animate'), { once: true });
+    }
   }
 
   function updateProgress() {

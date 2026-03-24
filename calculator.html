@@ -79,12 +79,12 @@
       height: 8px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.18);
-      transition: all 0.3s ease;
+      transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
     }
 
     .calc-step-dot.active {
       background: linear-gradient(135deg, #6366f1, #a855f7);
-      box-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
+      box-shadow: 0 0 6px rgba(99, 102, 241, 0.4);
       transform: scale(1.25);
     }
 
@@ -115,15 +115,13 @@
       top: 1rem;
     }
 
-    /* Main calculator card — dark glass */
+    /* Main calculator card */
     .calculator-card {
-      background: linear-gradient(180deg, rgba(12, 16, 32, 0.88), rgba(8, 12, 24, 0.96));
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(12, 16, 32, 0.96), rgba(8, 12, 24, 0.98));
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 20px;
       padding: 36px 40px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
       transition: box-shadow 0.2s ease;
     }
 
@@ -178,13 +176,13 @@
       background: rgba(255, 255, 255, 0.04);
       color: #ffffff;
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
       position: relative;
     }
 
     .answer-option:hover {
       border-color: rgba(99, 102, 241, 0.4);
-      box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
       transform: translateY(-2px);
     }
 
@@ -194,7 +192,7 @@
       border-width: 1px;
       border-color: rgba(99, 102, 241, 0.5);
       background: rgba(99, 102, 241, 0.18);
-      box-shadow: 0 0 24px rgba(99, 102, 241, 0.2);
+      box-shadow: 0 2px 12px rgba(99, 102, 241, 0.15);
     }
 
     .answer-option.selected .option-label,
@@ -223,7 +221,7 @@
       border-radius: 50%;
       opacity: 0;
       transform: scale(0.5);
-      transition: all 0.25s ease;
+      transition: opacity 0.2s ease, transform 0.2s ease;
     }
 
     .answer-option .option-check svg {
@@ -310,13 +308,11 @@
 
     /* Price box — dark glass */
     .price-box {
-      background: linear-gradient(180deg, rgba(12, 16, 32, 0.88), rgba(8, 12, 24, 0.96));
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(12, 16, 32, 0.96), rgba(8, 12, 24, 0.98));
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 18px;
       padding: 24px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
     }
 
     .price-label {
@@ -379,7 +375,7 @@
       background: rgba(255, 255, 255, 0.06);
       color: #cbd5f5;
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
     }
 
     .calc-btn-nav:hover {
@@ -418,13 +414,13 @@
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 12px;
       cursor: pointer;
-      transition: all 0.25s ease;
-      box-shadow: 0 4px 24px rgba(99, 102, 241, 0.4), 0 0 40px rgba(139, 92, 246, 0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.38), 0 0 20px rgba(139, 92, 246, 0.12);
     }
 
     .btn-offer:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(99, 102, 241, 0.5), 0 0 50px rgba(139, 92, 246, 0.2);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45), 0 0 26px rgba(139, 92, 246, 0.16);
       background: linear-gradient(135deg, #818cf8, #a78bfa, #c084fc);
     }
 
@@ -457,9 +453,8 @@
       }
     }
 
-    /* Fade-in on load */
     .calc-page {
-      animation: fadeIn 0.5s ease;
+      animation: fadeIn 0.35s ease;
     }
 
     @keyframes fadeIn {
@@ -467,15 +462,25 @@
       to { opacity: 1; }
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      .calc-page { animation: none; }
+      .answer-option:hover,
+      .answer-option.selected:hover,
+      .btn-offer:hover,
+      .summary-form .btn-submit:hover:not(:disabled) {
+        transform: none !important;
+      }
+    }
+
     /* ============================================
        Summary Step — dark glass
        ============================================ */
     .calculator-card.calc-card-summary {
-      background: linear-gradient(180deg, rgba(12, 16, 32, 0.88), rgba(8, 12, 24, 0.96));
+      background: linear-gradient(180deg, rgba(12, 16, 32, 0.96), rgba(8, 12, 24, 0.98));
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 20px;
       padding: 2.5rem 2.75rem;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
     }
 
     .calc-step-summary { padding: 0; }
@@ -497,7 +502,7 @@
       align-items: center;
       justify-content: center;
       margin-bottom: 1.5rem;
-      box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+      box-shadow: 0 0 10px rgba(99, 102, 241, 0.35);
     }
 
     .summary-icon svg { width: 28px; height: 28px; }
@@ -641,13 +646,13 @@
       border: 1px solid rgba(255, 255, 255, 0.15);
       color: white;
       cursor: pointer;
-      box-shadow: 0 4px 24px rgba(99, 102, 241, 0.4), 0 0 40px rgba(139, 92, 246, 0.15);
-      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.38), 0 0 20px rgba(139, 92, 246, 0.12);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
 
     .summary-form .btn-submit:hover:not(:disabled) {
       transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(99, 102, 241, 0.5), 0 0 50px rgba(139, 92, 246, 0.2);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45), 0 0 26px rgba(139, 92, 246, 0.16);
       background: linear-gradient(135deg, #818cf8, #a78bfa, #c084fc);
     }
 
@@ -713,10 +718,9 @@
     .price-box-summary {
       padding: 24px;
       border-radius: 18px;
-      background: linear-gradient(180deg, rgba(12, 16, 32, 0.88), rgba(8, 12, 24, 0.96));
-      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(12, 16, 32, 0.96), rgba(8, 12, 24, 0.98));
       border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
     }
 
     .price-box-summary .price-label {
@@ -842,13 +846,13 @@
       if (el && typeof initBackgroundAnimation === 'function') {
         initBackgroundAnimation(el, {
           linesGradient: ['#4f7cff', '#e8e9ff', '#ff6a5f'],
-          animationSpeed: 1,
+          animationSpeed: 0.5,
           bendRadius: 5,
           bendStrength: -0.5,
           mouseDamping: 0.05,
           parallax: true,
-          parallaxStrength: 0.2,
-          interactive: true
+          parallaxStrength: 0.05,
+          interactive: false
         });
       }
     })();

@@ -179,19 +179,23 @@
     }
 
     options = options || {};
+    if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return null;
+    }
+
     const linesGradient = options.linesGradient || ['#4f7cff', '#e8e9ff', '#ff6a5f'];
-    const animationSpeed = options.animationSpeed ?? 1;
+    const animationSpeed = options.animationSpeed ?? 0.55;
     const bendRadius = options.bendRadius ?? 5;
     const bendStrength = options.bendStrength ?? -0.5;
     const mouseDamping = options.mouseDamping ?? 0.05;
     const parallax = options.parallax !== false;
-    const parallaxStrength = options.parallaxStrength ?? 0.2;
-    const interactive = options.interactive !== false;
+    const parallaxStrength = options.parallaxStrength ?? 0.06;
+    const interactive = options.interactive === true;
     const enabledWaves = options.enabledWaves || ['top', 'middle', 'bottom'];
 
-    const topLineCount = enabledWaves.includes('top') ? 3 : 0;
-    const middleLineCount = enabledWaves.includes('middle') ? 4 : 0;
-    const bottomLineCount = enabledWaves.includes('bottom') ? 3 : 0;
+    const topLineCount = enabledWaves.includes('top') ? 2 : 0;
+    const middleLineCount = enabledWaves.includes('middle') ? 2 : 0;
+    const bottomLineCount = enabledWaves.includes('bottom') ? 2 : 0;
     const topLineDistance = 0.08;
     const middleLineDistance = 0.07;
     const bottomLineDistance = 0.08;
@@ -200,9 +204,9 @@
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
     camera.position.z = 1;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: false, powerPreference: 'low-power' });
     renderer.setClearColor(0x050816, 1);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';
     renderer.domElement.style.display = 'block';

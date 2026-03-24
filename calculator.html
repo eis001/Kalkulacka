@@ -461,9 +461,88 @@
     }
 
     .calc-step-nav {
-      display: flex;
-      gap: 1rem;
       margin-top: 1.25rem;
+    }
+
+    .calc-step-nav-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem 1.25rem;
+    }
+
+    .calc-step-nav-row .calc-btn-back {
+      flex-shrink: 0;
+    }
+
+    @keyframes calc-brand-warn-in {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .calc-brand-skip-warning {
+      flex: 1 1 240px;
+      min-width: min(100%, 260px);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 0.55rem 0.85rem;
+      margin: 0;
+      background: rgba(15, 18, 32, 0.92);
+      border: 1px solid rgba(250, 204, 21, 0.32);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(253, 224, 71, 0.06);
+      animation: calc-brand-warn-in 0.32s ease;
+    }
+
+    .calc-brand-skip-warning[hidden] {
+      display: none !important;
+    }
+
+    .calc-brand-skip-warning-icon {
+      flex-shrink: 0;
+      font-size: 1rem;
+      line-height: 1.45;
+      filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.2));
+    }
+
+    .calc-brand-skip-warning-text {
+      margin: 0;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      line-height: 1.45;
+      letter-spacing: -0.01em;
+      color: #fde68a;
+      background-image: linear-gradient(100deg, #fde047 0%, #fbbf24 50%, #fb923c 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+      .calc-brand-skip-warning-text {
+        color: #fcd34d;
+        background: none;
+        -webkit-text-fill-color: unset;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .calc-step-nav-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .calc-brand-skip-warning {
+        flex: 1 1 auto;
+        min-width: 0;
+      }
     }
 
     .calc-btn-nav {
@@ -889,7 +968,13 @@
           <div id="calculator-steps"></div>
 
           <div class="calc-step-nav" id="calc-step-nav">
-            <button type="button" class="calc-btn-nav calc-btn-back" id="calc-btn-back" style="display: none">← Zpět</button>
+            <div class="calc-step-nav-row">
+              <button type="button" class="calc-btn-nav calc-btn-back" id="calc-btn-back" style="display: none">← Zpět</button>
+              <div id="calc-brand-skip-warning" class="calc-brand-skip-warning" hidden aria-hidden="true" role="note">
+                <span class="calc-brand-skip-warning-icon" aria-hidden="true">⚠️</span>
+                <p class="calc-brand-skip-warning-text">Opravdu nechcete řešit grafiku? Kvalitní vizuál výrazně zvyšuje důvěru a počet zákazníků.</p>
+              </div>
+            </div>
           </div>
 
           <div class="calculator-footer" id="calc-footer">

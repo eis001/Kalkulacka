@@ -53,7 +53,7 @@
               variant: 'green'
             },
             {
-              label: 'Rozsáhlejší web + 3 stránky',
+              label: 'Web s více stránkami (3+)',
               description: 'Více podstránek (např. služby, o nás, kontakt) pro lepší prezentaci a důvěryhodnost.',
               value: 3000,
               priceLabel: '+3 000 Kč',
@@ -72,8 +72,8 @@
           text: 'Máte už grafiku a logo pro váš web?',
           options: [
             {
-              label: 'Chci grafiku na míru včetně loga',
-              description: 'Vytvoříme vám kompletní vizuální styl – logo, barvy i grafiku pro web.',
+              label: 'Chci kompletní vizuální styl (logo + grafika)',
+              description: 'Vytvoříme vám vizuální identitu včetně loga, barev a tematických fotek pro váš web.',
               value: 4000,
               priceLabel: '+4 000 Kč',
               variant: 'blue',
@@ -89,7 +89,8 @@
               label: 'Grafiku teď neřeším',
               description: 'Zaměříme se jen na funkční web bez řešení vizuální identity.',
               value: 0,
-              variant: 'red'
+              variant: 'red',
+              confirmSkipGraphics: true
             }
           ]
         }
@@ -152,6 +153,30 @@
 
   let currentStep = 0;
   const answers = {};
+  let brandVisualSkipPending = false;
+
+  function hideBrandSkipWarning() {
+    const el = document.getElementById('calc-brand-skip-warning');
+    if (el) {
+      el.hidden = true;
+      el.setAttribute('aria-hidden', 'true');
+    }
+  }
+
+  function showBrandSkipWarning() {
+    const el = document.getElementById('calc-brand-skip-warning');
+    if (el) {
+      el.hidden = false;
+      el.setAttribute('aria-hidden', 'false');
+    }
+  }
+
+  function clearBrandVisualPendingSelection() {
+    if (answers['brand-visual']) return;
+    stepsContainer
+      .querySelectorAll('.answer-options[data-question-id="brand-visual"] .answer-option')
+      .forEach((b) => b.classList.remove('selected'));
+  }
 
   function renderStepContent(stepIndex) {
     const step = steps[stepIndex];
@@ -179,7 +204,7 @@
         btn.type = 'button';
         btn.className = `answer-option answer-variant-${opt.variant || 'default'}`;
         btn.dataset.value = opt.value;
-        btn.dataset.optionIndex = optIndex;
+        btn.dataset.optionIndex = String(optIndex);
         const priceClass = opt.priceStyle === 'pill' ? 'option-price option-price-pill' : 'option-price option-price-highlight';
         const priceBadge = opt.priceLabel ? `<span class="${priceClass}">${opt.priceLabel}</span>` : '';
         btn.innerHTML = `
@@ -192,7 +217,26 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
         `;
-        btn.addEventListener('click', () => selectAnswer(q.id, opt.value, optIndex, optionsContainer, btn));
+        btn.addEventListener('click', () => {
+          if (opt.confirmSkipGraphics) {
+            if (brandVisualSkipPending) {
+              brandVisualSkipPending = false;
+              hideBrandSkipWarning();
+              selectAnswer(q.id, opt.value, optIndex, optionsContainer, btn);
+            } else {
+              brandVisualSkipPending = true;
+              showBrandSkipWarning();
+              optionsContainer.querySelectorAll('.answer-option').forEach((b) => b.classList.remove('selected'));
+              btn.classList.add('selected');
+            }
+            return;
+          }
+          if (q.id === 'brand-visual') {
+            brandVisualSkipPending = false;
+            hideBrandSkipWarning();
+          }
+          selectAnswer(q.id, opt.value, optIndex, optionsContainer, btn);
+        });
         optionsContainer.appendChild(btn);
       });
 
@@ -332,6 +376,8 @@
   }
 
   function handleRestart() {
+    brandVisualSkipPending = false;
+    hideBrandSkipWarning();
     Object.keys(answers).forEach((k) => delete answers[k]);
     renderAllSteps();
     showStep(0);
@@ -347,11 +393,24 @@
   }
 
   function showStep(index) {
+    const prevStep = steps[currentStep];
+    if (prevStep?.id === 'brand-visual' && steps[index]?.id !== 'brand-visual') {
+      brandVisualSkipPending = false;
+      hideBrandSkipWarning();
+      clearBrandVisualPendingSelection();
+    }
+
     currentStep = index;
     stepsContainer.querySelectorAll('.calc-step-content').forEach((el, i) => {
       el.classList.toggle('active', i === index);
     });
     const step = steps[index];
+    if (step && step.id === 'brand-visual') {
+      if (brandVisualSkipPending) showBrandSkipWarning();
+      else hideBrandSkipWarning();
+    } else {
+      hideBrandSkipWarning();
+    }
     if (step && step.questions) restoreSelections(step);
     const card = document.querySelector('.calculator-card');
     if (card) card.classList.toggle('calc-card-summary', step?.type === 'summary');
